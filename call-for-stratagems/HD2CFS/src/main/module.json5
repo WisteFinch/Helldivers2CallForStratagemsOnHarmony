@@ -1,0 +1,38 @@
+{
+  "module": {
+    "name": "HD2CFS",
+    "type": "entry",
+    "description": "$string:module_desc",
+    "mainElement": "CFSAbility",
+    "deviceTypes": [
+      "phone",
+      "tablet",
+      "2in1"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "abilities": [
+      {
+        "name": "HD2CFSAbility",
+        "srcEntry": "./ets/MainAbility.ets",
+        "description": "$string:HD2CFSAbility_desc",
+        "icon": "$media:layered_image",
+        "label": "$string:HD2CFSAbility_label",
+        "startWindowIcon": "$media:app_icon",
+        "startWindowBackground": "$color:start_window_background",
+        "exported": true,
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "action.system.home"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

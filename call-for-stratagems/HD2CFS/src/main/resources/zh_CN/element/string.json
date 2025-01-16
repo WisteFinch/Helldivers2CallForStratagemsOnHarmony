@@ -1,0 +1,148 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "把手机绑在手臂上，通过手机呼叫战略配备，做真正的绝地潜兵！"
+    },
+    {
+      "name": "HD2CFSAbility_desc",
+      "value": "把手机绑在手臂上，通过手机呼叫战略配备，做真正的绝地潜兵！"
+    },
+    {
+      "name": "HD2CFSAbility_label",
+      "value": "呼叫战略配备"
+    },
+    {
+      "name": "root_page_title",
+      "value": "呼叫战略配备"
+    },
+    {
+      "name": "list_page_title",
+      "value": "战略配备列表"
+    },
+    {
+      "name": "edit_page_title",
+      "value": "编辑战备组合"
+    },
+    {
+      "name": "view_page_title",
+      "value": "浏览战备组合"
+    },
+    {
+      "name": "play_page_title",
+      "value": "播放"
+    },
+    {
+      "name": "root_new_group_fab",
+      "value": "新战备组合"
+    },
+    {
+      "name": "view_play_fab",
+      "value": "播放"
+    },
+    {
+      "name": "play_free_input",
+      "value": "自由输入"
+    },
+    {
+      "name": "set_conn_ip_addr",
+      "value": "地址"
+    },
+    {
+      "name": "set_conn_retry",
+      "value": "重试次数"
+    },
+    {
+      "name": "set_conn_ip",
+      "value": "服务器"
+    },
+    {
+      "name": "set_conn_hdr",
+      "value": "连接"
+    },
+    {
+      "name": "set_page_title",
+      "value": "设置"
+    },
+    {
+      "name": "set_conn_ip_port",
+      "value": "端口"
+    },
+    {
+      "name": "set_conn_test",
+      "value": "测试连接"
+    },
+    {
+      "name": "set_conn_scan",
+      "value": "扫描二维码"
+    },
+    {
+      "name": "set_unit_ms",
+      "value": "毫秒"
+    },
+    {
+      "name": "set_sync_hdr",
+      "value": "同步"
+    },
+    {
+      "name": "set_sync_port",
+      "value": "端口"
+    },
+    {
+      "name": "set_sync_delay",
+      "value": "输入延迟"
+    },
+    {
+      "name": "set_sync_apply",
+      "value": "应用配置至服务器"
+    },
+    {
+      "name": "set_sync_input_open",
+      "value": "输入：打开战略配备列表"
+    },
+    {
+      "name": "set_ctrl_hdr",
+      "value": "控制"
+    },
+    {
+      "name": "set_info_hdr",
+      "value": "信息"
+    },
+    {
+      "name": "set_info_about",
+      "value": "关于"
+    },
+    {
+      "name": "set_info_app",
+      "value": "软件版本"
+    },
+    {
+      "name": "set_info_updatable",
+      "value": "可更新"
+    },
+    {
+      "name": "set_info_latest",
+      "value": "已是最新"
+    },
+    {
+      "name": "set_info_chk_updt",
+      "value": "检查更新"
+    },
+    {
+      "name": "set_info_db",
+      "value": "数据库版本"
+    },
+    {
+      "name": "set_ctrl_simplified_mode",
+      "value": "启用精简模式"
+    },
+    {
+      "name": "set_ctrl_stratagem_lang",
+      "value": "语言：战备名称"
+    },
+    {
+      "name": "set_ctrl_simplified_mode_desc",
+      "value": "只保留一键输入（宏），去除大部分装饰"
+    }
+  ]
+}

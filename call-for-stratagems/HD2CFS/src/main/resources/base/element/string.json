@@ -1,0 +1,156 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "Tie your phone to your arm so that you can call for stratagems like a real helldiver!"
+    },
+    {
+      "name": "HD2CFSAbility_desc",
+      "value": "Tie your phone to your arm so that you can call for stratagems like a real helldiver!"
+    },
+    {
+      "name": "HD2CFSAbility_label",
+      "value": "CallForStratagems"
+    },
+    {
+      "name": "root_page_title",
+      "value": "CallForStratagems"
+    },
+    {
+      "name": "list_page_title",
+      "value": "Stratagems List"
+    },
+    {
+      "name": "edit_page_title",
+      "value": "Edit Group"
+    },
+    {
+      "name": "view_page_title",
+      "value": "Browse Group"
+    },
+    {
+      "name": "play_page_title",
+      "value": "Play"
+    },
+    {
+      "name": "root_new_group_fab",
+      "value": "New Stratagems Group"
+    },
+    {
+      "name": "root_no_group",
+      "value": "The Galactic War Awaits"
+    },
+    {
+      "name": "view_play_fab",
+      "value": "Play"
+    },
+    {
+      "name": "play_blank",
+      "value": "PERSONAL HELLPAD\nSYSTEM"
+    },
+    {
+      "name": "play_free_input",
+      "value": "FREE INPUT"
+    },
+    {
+      "name": "set_page_title",
+      "value": "Settings"
+    },
+    {
+      "name": "set_conn_hdr",
+      "value": "Connection"
+    },
+    {
+      "name": "set_conn_ip",
+      "value": "Server"
+    },
+    {
+      "name": "set_conn_retry",
+      "value": "Retry Times"
+    },
+    {
+      "name": "set_conn_test",
+      "value": "Test Connection"
+    },
+    {
+      "name": "set_conn_ip_addr",
+      "value": "Address"
+    },
+    {
+      "name": "set_conn_ip_port",
+      "value": "Port"
+    },
+    {
+      "name": "set_conn_scan",
+      "value": "Scan QR Code"
+    },
+    {
+      "name": "set_sync_hdr",
+      "value": "Sync"
+    },
+    {
+      "name": "set_sync_port",
+      "value": "Port"
+    },
+    {
+      "name": "set_sync_delay",
+      "value": "Input Interval Time"
+    },
+    {
+      "name": "set_sync_input_open",
+      "value": "Input: Open Stratagems List"
+    },
+    {
+      "name": "set_sync_apply",
+      "value": "Apply Configuration to Server"
+    },
+    {
+      "name": "set_unit_ms",
+      "value": "ms"
+    },
+    {
+      "name": "set_ctrl_hdr",
+      "value": "Control"
+    },
+    {
+      "name": "set_ctrl_simplified_mode",
+      "value": "Enable Simplified Mode"
+    },
+    {
+      "name": "set_ctrl_simplified_mode_desc",
+      "value": "Keep only macro functions and remove most decorations"
+    },
+    {
+      "name": "set_ctrl_stratagem_lang",
+      "value": "Language: Stratagem Name"
+    },
+    {
+      "name": "set_info_hdr",
+      "value": "Info"
+    },
+    {
+      "name": "set_info_db",
+      "value": "Database Version"
+    },
+    {
+      "name": "set_info_chk_updt",
+      "value": "Check Update"
+    },
+    {
+      "name": "set_info_latest",
+      "value": "Latest"
+    },
+    {
+      "name": "set_info_updatable",
+      "value": "Updatable"
+    },
+    {
+      "name": "set_info_app",
+      "value": "App Version"
+    },
+    {
+      "name": "set_info_about",
+      "value": "About"
+    }
+  ]
+}
