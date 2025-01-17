@@ -3,9 +3,11 @@ import hilog from '@ohos.hilog';
 import UIAbility from '@ohos.app.ability.UIAbility';
 import Want from '@ohos.app.ability.Want';
 import window from '@ohos.window';
+import PreferencesUtil from './common/PreferencesUtil';
 
 export default class CFSAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+    PreferencesUtil.loadPreference(this.context)
   }
 
   onDestroy(): void {

@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "opt_lang_auto",
+      "value": "System Language"
+    },
+    {
+      "name": "opt_lang_zh_cn",
+      "value": "Simplified Chinese(简体中文)"
+    },
+    {
+      "name": "opt_lang_en",
+      "value": "English"
+    }
+  ]
+}

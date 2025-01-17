@@ -25,8 +25,6 @@ struct RootPage {
               .fontSize(16)
               .fontWeight(500)
               .textAlign(TextAlign.Center)
-              .onClick(()=>{
-              })
           }
         }
         .width("100%")

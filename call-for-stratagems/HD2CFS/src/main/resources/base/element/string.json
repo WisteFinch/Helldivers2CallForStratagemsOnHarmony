@@ -61,7 +61,7 @@
       "value": "Connection"
     },
     {
-      "name": "set_conn_ip",
+      "name": "set_conn_server",
       "value": "Server"
     },
     {
@@ -73,11 +73,11 @@
       "value": "Test Connection"
     },
     {
-      "name": "set_conn_ip_addr",
+      "name": "set_conn_addr",
       "value": "Address"
     },
     {
-      "name": "set_conn_ip_port",
+      "name": "set_conn_port",
       "value": "Port"
     },
     {
@@ -121,10 +121,6 @@
       "value": "Keep only macro functions and remove most decorations"
     },
     {
-      "name": "set_ctrl_stratagem_lang",
-      "value": "Language: Stratagem Name"
-    },
-    {
       "name": "set_info_hdr",
       "value": "Info"
     },
@@ -151,6 +147,30 @@
     {
       "name": "set_info_about",
       "value": "About"
+    },
+    {
+      "name": "set_sync_type_open",
+      "value": "Type: Open Stratagems List"
+    },
+    {
+      "name": "set_sync_input_up",
+      "value": "Input: Up"
+    },
+    {
+      "name": "set_sync_input_down",
+      "value": "Input: Down"
+    },
+    {
+      "name": "set_sync_input_left",
+      "value": "Input: Left"
+    },
+    {
+      "name": "set_sync_input_right",
+      "value": "Input: Right"
+    },
+    {
+      "name": "set_ctrl_lang_stratagem",
+      "value": "Language: Stratagem Name"
     }
   ]
 }

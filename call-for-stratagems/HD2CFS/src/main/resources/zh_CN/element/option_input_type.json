@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "opt_in_type_hold",
+      "value": "按住"
+    },
+    {
+      "name": "opt_in_type_press",
+      "value": "按下"
+    },
+    {
+      "name": "opt_in_type_long_press",
+      "value": "长按"
+    },
+    {
+      "name": "opt_in_type_tap",
+      "value": "轻按"
+    },
+    {
+      "name": "opt_in_type_double_tap",
+      "value": "连按两次"
+    }
+  ]
+}

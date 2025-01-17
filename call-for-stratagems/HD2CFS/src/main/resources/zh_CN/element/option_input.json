@@ -1,0 +1,440 @@
+{
+  "string": [
+    {
+      "name": "opt_in_alt",
+      "value": "左 Alt"
+    },
+    {
+      "name": "opt_in_alt_gr",
+      "value": "右 Alt"
+    },
+    {
+      "name": "opt_in_ctrl_left",
+      "value": "左 Ctrl"
+    },
+    {
+      "name": "opt_in_ctrl_right",
+      "value": "右 Ctrl"
+    },
+    {
+      "name": "opt_in_shift_left",
+      "value": "左 Shift"
+    },
+    {
+      "name": "opt_in_shift_right",
+      "value": "右 Shift"
+    },
+    {
+      "name": "opt_in_up",
+      "value": "上箭头"
+    },
+    {
+      "name": "opt_in_down",
+      "value": "下箭头"
+    },
+    {
+      "name": "opt_in_left",
+      "value": "左箭头"
+    },
+    {
+      "name": "opt_in_right",
+      "value": "右箭头"
+    },
+    {
+      "name": "opt_in_1",
+      "value": "数字 1"
+    },
+    {
+      "name": "opt_in_2",
+      "value": "数字 2"
+    },
+    {
+      "name": "opt_in_3",
+      "value": "数字 3"
+    },
+    {
+      "name": "opt_in_4",
+      "value": "数字 4"
+    },
+    {
+      "name": "opt_in_5",
+      "value": "数字 5"
+    },
+    {
+      "name": "opt_in_6",
+      "value": "数字 6"
+    },
+    {
+      "name": "opt_in_7",
+      "value": "数字 7"
+    },
+    {
+      "name": "opt_in_8",
+      "value": "数字 8"
+    },
+    {
+      "name": "opt_in_9",
+      "value": "数字 9"
+    },
+    {
+      "name": "opt_in_0",
+      "value": "数字 0"
+    },
+    {
+      "name": "opt_in_a",
+      "value": "A"
+    },
+    {
+      "name": "opt_in_b",
+      "value": "B"
+    },
+    {
+      "name": "opt_in_c",
+      "value": "C"
+    },
+    {
+      "name": "opt_in_d",
+      "value": "D"
+    },
+    {
+      "name": "opt_in_e",
+      "value": "E"
+    },
+    {
+      "name": "opt_in_f",
+      "value": "F"
+    },
+    {
+      "name": "opt_in_g",
+      "value": "G"
+    },
+    {
+      "name": "opt_in_h",
+      "value": "H"
+    },
+    {
+      "name": "opt_in_i",
+      "value": "I"
+    },
+    {
+      "name": "opt_in_j",
+      "value": "J"
+    },
+    {
+      "name": "opt_in_k",
+      "value": "K"
+    },
+    {
+      "name": "opt_in_l",
+      "value": "L"
+    },
+    {
+      "name": "opt_in_m",
+      "value": "M"
+    },
+    {
+      "name": "opt_in_n",
+      "value": "N"
+    },
+    {
+      "name": "opt_in_o",
+      "value": "O"
+    },
+    {
+      "name": "opt_in_p",
+      "value": "P"
+    },
+    {
+      "name": "opt_in_q",
+      "value": "Q"
+    },
+    {
+      "name": "opt_in_r",
+      "value": "R"
+    },
+    {
+      "name": "opt_in_s",
+      "value": "S"
+    },
+    {
+      "name": "opt_in_t",
+      "value": "T"
+    },
+    {
+      "name": "opt_in_u",
+      "value": "U"
+    },
+    {
+      "name": "opt_in_v",
+      "value": "V"
+    },
+    {
+      "name": "opt_in_w",
+      "value": "W"
+    },
+    {
+      "name": "opt_in_x",
+      "value": "X"
+    },
+    {
+      "name": "opt_in_y",
+      "value": "Y"
+    },
+    {
+      "name": "opt_in_z",
+      "value": "Z"
+    },
+    {
+      "name": "opt_in_back_quote",
+      "value": "`"
+    },
+    {
+      "name": "opt_in_minus",
+      "value": "-"
+    },
+    {
+      "name": "opt_in_equal",
+      "value": "="
+    },
+    {
+      "name": "opt_in_semicolon",
+      "value": ";"
+    },
+    {
+      "name": "opt_in_quota",
+      "value": "'"
+    },
+    {
+      "name": "opt_in_slash",
+      "value": "\\"
+    },
+    {
+      "name": "opt_in_comma",
+      "value": ","
+    },
+    {
+      "name": "opt_in_period",
+      "value": "."
+    },
+    {
+      "name": "opt_in_backward_slash",
+      "value": "/"
+    },
+    {
+      "name": "opt_in_left_bracket",
+      "value": "["
+    },
+    {
+      "name": "opt_in_right_bracket",
+      "value": "]"
+    },
+    {
+      "name": "opt_in_f1",
+      "value": "F1"
+    },
+    {
+      "name": "opt_in_f2",
+      "value": "F2"
+    },
+    {
+      "name": "opt_in_f3",
+      "value": "F3"
+    },
+    {
+      "name": "opt_in_f4",
+      "value": "F4"
+    },
+    {
+      "name": "opt_in_f5",
+      "value": "F5"
+    },
+    {
+      "name": "opt_in_f6",
+      "value": "F6"
+    },
+    {
+      "name": "opt_in_f7",
+      "value": "F7"
+    },
+    {
+      "name": "opt_in_f8",
+      "value": "F8"
+    },
+    {
+      "name": "opt_in_f9",
+      "value": "F9"
+    },
+    {
+      "name": "opt_in_f10",
+      "value": "F10"
+    },
+    {
+      "name": "opt_in_f11",
+      "value": "F11"
+    },
+    {
+      "name": "opt_in_f12",
+      "value": "F12"
+    },
+    {
+      "name": "opt_in_backspace",
+      "value": "Backspace"
+    },
+    {
+      "name": "opt_in_enter",
+      "value": "Enter"
+    },
+    {
+      "name": "opt_in_delete",
+      "value": "Delete"
+    },
+    {
+      "name": "opt_in_caps_lock",
+      "value": "Caps Lock"
+    },
+    {
+      "name": "opt_in_space",
+      "value": "Space"
+    },
+    {
+      "name": "opt_in_tab",
+      "value": "Tab"
+    },
+    {
+      "name": "opt_in_fn",
+      "value": "Fn"
+    },
+    {
+      "name": "opt_in_insert",
+      "value": "Insert"
+    },
+    {
+      "name": "opt_in_home",
+      "value": "Home"
+    },
+    {
+      "name": "opt_in_end",
+      "value": "End"
+    },
+    {
+      "name": "opt_in_esc",
+      "value": "Esc"
+    },
+    {
+      "name": "opt_in_page_down",
+      "value": "page Down"
+    },
+    {
+      "name": "opt_in_page_up",
+      "value": "Page Up"
+    },
+    {
+      "name": "opt_in_print_screen",
+      "value": "Print Screen"
+    },
+    {
+      "name": "opt_in_scroll_lock",
+      "value": "Scroll Lock"
+    },
+    {
+      "name": "opt_in_num_lock",
+      "value": "Num Lock"
+    },
+    {
+      "name": "opt_in_pause",
+      "value": "Pause"
+    },
+    {
+      "name": "opt_in_kp_minus",
+      "value": "小键盘 -"
+    },
+    {
+      "name": "opt_in_kp_plus",
+      "value": "小键盘 +"
+    },
+    {
+      "name": "opt_in_kp_asterisk",
+      "value": "小键盘 *"
+    },
+    {
+      "name": "opt_in_kp_backward_slash",
+      "value": "小键盘 /"
+    },
+    {
+      "name": "opt_in_kp0",
+      "value": "小键盘 0"
+    },
+    {
+      "name": "opt_in_kp1",
+      "value": "小键盘 1"
+    },
+    {
+      "name": "opt_in_kp2",
+      "value": "小键盘 2"
+    },
+    {
+      "name": "opt_in_kp3",
+      "value": "小键盘 3"
+    },
+    {
+      "name": "opt_in_kp4",
+      "value": "小键盘 4"
+    },
+    {
+      "name": "opt_in_kp5",
+      "value": "小键盘 5"
+    },
+    {
+      "name": "opt_in_kp6",
+      "value": "小键盘 6"
+    },
+    {
+      "name": "opt_in_kp7",
+      "value": "小键盘 7"
+    },
+    {
+      "name": "opt_in_kp8",
+      "value": "小键盘 8"
+    },
+    {
+      "name": "opt_in_kp9",
+      "value": "小键盘 9"
+    },
+    {
+      "name": "opt_in_kp_delete",
+      "value": "小键盘 Delete"
+    },
+    {
+      "name": "opt_in_mouse_left",
+      "value": "鼠标左键"
+    },
+    {
+      "name": "opt_in_mouse_right",
+      "value": "鼠标左键"
+    },
+    {
+      "name": "opt_in_mouse_middle",
+      "value": "鼠标中键"
+    },
+    {
+      "name": "opt_in_mouse3",
+      "value": "鼠标侧键 1"
+    },
+    {
+      "name": "opt_in_mouse4",
+      "value": "鼠标侧键 2"
+    },
+    {
+      "name": "opt_in_mouse5",
+      "value": "鼠标侧键 3"
+    },
+    {
+      "name": "opt_in_wheel_up",
+      "value": "鼠标滚轮 上"
+    },
+    {
+      "name": "opt_in_wheel_down",
+      "value": "鼠标滚轮 下"
+    }
+  ]
+}

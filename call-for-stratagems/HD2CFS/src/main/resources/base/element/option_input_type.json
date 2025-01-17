@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "opt_in_type_hold",
+      "value": "Hold"
+    },
+    {
+      "name": "opt_in_type_press",
+      "value": "Press"
+    },
+    {
+      "name": "opt_in_type_long_press",
+      "value": "Long Press"
+    },
+    {
+      "name": "opt_in_type_tap",
+      "value": "Tap"
+    },
+    {
+      "name": "opt_in_type_double_tap",
+      "value": "Double Press"
+    }
+  ]
+}

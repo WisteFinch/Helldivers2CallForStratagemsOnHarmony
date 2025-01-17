@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "opt_lang_auto",
+      "value": "跟随系统"
+    },
+    {
+      "name": "opt_lang_zh_cn",
+      "value": "简体中文"
+    },
+    {
+      "name": "opt_lang_en",
+      "value": "英文（English）"
+    }
+  ]
+}
