@@ -163,6 +163,10 @@
     {
       "name": "set_ctrl_lang_stratagem",
       "value": "语言：战略配备名称"
+    },
+    {
+      "name": "about_page_title",
+      "value": "关于"
     }
   ]
 }

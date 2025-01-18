@@ -5,13 +5,22 @@ export const PREFERENCES_RETRY: string = 'retry'
 export const PREFERENCES_SYNC_PORT: string = 'sync_port'
 export const PREFERENCES_DELAY: string = 'delay'
 export const PREFERENCES_INPUT_OPEN: string = 'input_open'
+export const PREFERENCES_INPUT_OPEN_DSP: string = 'input_open_dsp'
 export const PREFERENCES_TYPE_OPEN: string = 'type_open'
+export const PREFERENCES_TYPE_OPEN_DSP: string = 'type_open_dsp'
 export const PREFERENCES_INPUT_UP: string = 'input_up'
+export const PREFERENCES_INPUT_UP_DSP: string = 'input_up_dsp'
 export const PREFERENCES_INPUT_DOWN: string = 'input_down'
+export const PREFERENCES_INPUT_DOWN_DSP: string = 'input_down_dsp'
 export const PREFERENCES_INPUT_LEFT: string = 'input_left'
+export const PREFERENCES_INPUT_LEFT_DSP: string = 'input_left_dsp'
 export const PREFERENCES_INPUT_RIGHT: string = 'input_right'
+export const PREFERENCES_INPUT_RIGHT_DSP: string = 'input_right_dsp'
 export const PREFERENCES_SIMPLIFIED_MODE: string = 'simplified_mode'
 export const PREFERENCES_LANG_STRATAGEM: string = 'lang_stratagem'
+export const PREFERENCES_LANG_STRATAGEM_DSP: string = 'lang_stratagem_dsp'
+
+export const DATABASE_NAME: string = 'app_database.db'
 
 export const INPUT_OPTIONS: SelectOption[] = [
   {value: $r('app.string.opt_in_alt')},

@@ -4,17 +4,24 @@ import {
   LANGUAGE_OPTIONS,
   PREFERENCES_DELAY,
   PREFERENCES_INPUT_DOWN,
+  PREFERENCES_INPUT_DOWN_DSP,
   PREFERENCES_INPUT_LEFT,
+  PREFERENCES_INPUT_LEFT_DSP,
   PREFERENCES_INPUT_OPEN,
+  PREFERENCES_INPUT_OPEN_DSP,
   PREFERENCES_INPUT_RIGHT,
+  PREFERENCES_INPUT_RIGHT_DSP,
   PREFERENCES_INPUT_UP,
+  PREFERENCES_INPUT_UP_DSP,
   PREFERENCES_LANG_STRATAGEM,
+  PREFERENCES_LANG_STRATAGEM_DSP,
   PREFERENCES_RETRY,
   PREFERENCES_SERVER_ADDR,
   PREFERENCES_SERVER_PORT,
   PREFERENCES_SIMPLIFIED_MODE,
   PREFERENCES_SYNC_PORT,
-  PREFERENCES_TYPE_OPEN
+  PREFERENCES_TYPE_OPEN,
+  PREFERENCES_TYPE_OPEN_DSP
 } from "../common/Constants";
 import PreferencesUtil from "../common/PreferencesUtil";
 import { DividerLine, ListItemGroupHead, PageHead } from "../common/UiUtils";
@@ -178,8 +185,10 @@ export struct SettingsPage {
                   Select(INPUT_OPTIONS)
                     .layoutWeight(1)
                     .selected(Number(PreferencesUtil.getVal(PREFERENCES_INPUT_OPEN, 2)))
-                    .onSelect((index: number) => {
+                    .value(PreferencesUtil.getVal(PREFERENCES_INPUT_OPEN_DSP, 'Left Ctrl').toString())
+                    .onSelect((index: number, value: string) => {
                       PreferencesUtil.putVal(PREFERENCES_INPUT_OPEN, index)
+                      PreferencesUtil.putVal(PREFERENCES_INPUT_OPEN_DSP, value)
                     })
                 }
               }
@@ -194,8 +203,10 @@ export struct SettingsPage {
                   Select(INPUT_TYPE_OPTIONS)
                     .layoutWeight(1)
                     .selected(Number(PreferencesUtil.getVal(PREFERENCES_TYPE_OPEN, 0)))
-                    .onSelect((index: number) => {
+                    .value(PreferencesUtil.getVal(PREFERENCES_TYPE_OPEN_DSP, 'Hold').toString())
+                    .onSelect((index: number, value:string) => {
                       PreferencesUtil.putVal(PREFERENCES_TYPE_OPEN, index)
+                      PreferencesUtil.putVal(PREFERENCES_TYPE_OPEN_DSP, value)
                     })
                 }
               }
@@ -210,8 +221,10 @@ export struct SettingsPage {
                   Select(INPUT_OPTIONS)
                     .layoutWeight(1)
                     .selected(Number(PreferencesUtil.getVal(PREFERENCES_INPUT_UP, 42)))
-                    .onSelect((index: number) => {
+                    .value(PreferencesUtil.getVal(PREFERENCES_INPUT_UP_DSP, 'W').toString())
+                    .onSelect((index: number, value: string) => {
                       PreferencesUtil.putVal(PREFERENCES_INPUT_UP, index)
+                      PreferencesUtil.putVal(PREFERENCES_INPUT_UP_DSP, value)
                     })
                 }
               }
@@ -226,8 +239,10 @@ export struct SettingsPage {
                   Select(INPUT_OPTIONS)
                     .layoutWeight(1)
                     .selected(Number(PreferencesUtil.getVal(PREFERENCES_INPUT_DOWN, 38)))
-                    .onSelect((index: number) => {
+                    .value(PreferencesUtil.getVal(PREFERENCES_INPUT_DOWN_DSP, 'S').toString())
+                    .onSelect((index: number, value:string) => {
                       PreferencesUtil.putVal(PREFERENCES_INPUT_DOWN, index)
+                      PreferencesUtil.putVal(PREFERENCES_INPUT_DOWN_DSP, value)
                     })
                 }
               }
@@ -242,8 +257,10 @@ export struct SettingsPage {
                   Select(INPUT_OPTIONS)
                     .layoutWeight(1)
                     .selected(Number(PreferencesUtil.getVal(PREFERENCES_INPUT_LEFT, 20)))
-                    .onSelect((index: number) => {
+                    .value(PreferencesUtil.getVal(PREFERENCES_INPUT_LEFT_DSP, 'A').toString())
+                    .onSelect((index: number, value: string) => {
                       PreferencesUtil.putVal(PREFERENCES_INPUT_LEFT, index)
+                      PreferencesUtil.putVal(PREFERENCES_INPUT_LEFT_DSP, value)
                     })
                 }
               }
@@ -258,8 +275,10 @@ export struct SettingsPage {
                   Select(INPUT_OPTIONS)
                     .layoutWeight(1)
                     .selected(Number(PreferencesUtil.getVal(PREFERENCES_INPUT_RIGHT, 23)))
-                    .onSelect((index: number) => {
+                    .value(PreferencesUtil.getVal(PREFERENCES_INPUT_RIGHT_DSP, 'D').toString())
+                    .onSelect((index: number, value: string) => {
                       PreferencesUtil.putVal(PREFERENCES_INPUT_RIGHT, index)
+                      PreferencesUtil.putVal(PREFERENCES_INPUT_RIGHT_DSP, value)
                     })
                 }
               }
@@ -329,8 +348,10 @@ export struct SettingsPage {
                   Select(LANGUAGE_OPTIONS)
                     .layoutWeight(1)
                     .selected(Number(PreferencesUtil.getVal(PREFERENCES_LANG_STRATAGEM, 0)))
-                    .onSelect((index: number) => {
+                    .value(PreferencesUtil.getVal(PREFERENCES_LANG_STRATAGEM_DSP, 'System Language').toString())
+                    .onSelect((index: number, value: string) => {
                       PreferencesUtil.putVal(PREFERENCES_LANG_STRATAGEM, index)
+                      PreferencesUtil.putVal(PREFERENCES_LANG_STRATAGEM_DSP, value)
                     })
                 }
               }

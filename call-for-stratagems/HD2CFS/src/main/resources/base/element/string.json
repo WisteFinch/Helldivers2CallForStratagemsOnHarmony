@@ -171,6 +171,10 @@
     {
       "name": "set_ctrl_lang_stratagem",
       "value": "Language: Stratagem Name"
+    },
+    {
+      "name": "about_page_title",
+      "value": "About"
     }
   ]
 }
