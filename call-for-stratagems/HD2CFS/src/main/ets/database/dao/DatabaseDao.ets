@@ -16,7 +16,8 @@ export class DatabaseDao {
                   id TEXT PRIMARY KEY,
                   name TEXT,
                   nameZh TEXT,
-                  url TEXT)`
+                  url TEXT,
+                  ver TEXT)`;
     // 创建表
     relationalStore.getRdbStore(context, {
       name: DATABASE_NAME,
@@ -25,7 +26,7 @@ export class DatabaseDao {
       (_err, rdbStore) => {
         rdbStore.executeSql(sql)
         this.rdbStore = rdbStore
-      })
+      });
   }
 
   /**
@@ -34,20 +35,21 @@ export class DatabaseDao {
    */
   async getDBList(): Promise<DatabaseModel[]> {
     if (this.rdbStore == null) {
-      return []
+      return [];
     }
-    let predicates = new relationalStore.RdbPredicates(this.tableName)
-    let res = await this.rdbStore?.query(predicates, ['id', 'name', 'nameZh', 'url'])
-    let dbs: DatabaseModel[] = []
+    let predicates = new relationalStore.RdbPredicates(this.tableName);
+    let res = await this.rdbStore?.query(predicates, ['id', 'name', 'nameZh', 'url', 'ver']);
+    let dbs: DatabaseModel[] = [];
     while(!res.isAtLastRow){
-      res.goToNextRow()
-      let id = res.getString(res.getColumnIndex('id'))
-      let name = res.getString(res.getColumnIndex('name'))
-      let nameZh = res.getString(res.getColumnIndex('nameZh'))
-      let url = res.getString(res.getColumnIndex('url'))
-      dbs.push(new DatabaseModel(id, name, nameZh, url))
+      res.goToNextRow();
+      let id = res.getString(res.getColumnIndex('id'));
+      let name = res.getString(res.getColumnIndex('name'));
+      let nameZh = res.getString(res.getColumnIndex('nameZh'));
+      let url = res.getString(res.getColumnIndex('url'));
+      let ver = res.getString(res.getColumnIndex('ver'));
+      dbs.push(new DatabaseModel(id, name, nameZh, url, ver));
     }
-    return dbs
+    return dbs;
   }
 
   /**
@@ -57,49 +59,69 @@ export class DatabaseDao {
    */
   async getDB(id: string): Promise<DatabaseModel>{
     if (this.rdbStore == null) {
-      return new DatabaseModel('null', 'null', 'null', 'null')
+      return new DatabaseModel('null', 'null', 'null', 'null', 'null');
     }
-    let predicates = new relationalStore.RdbPredicates(this.tableName)
-    predicates.equalTo('id', id)
-    let res = await this.rdbStore?.query(predicates, ['name', 'nameZh', 'url'])
-    let name = res.getString(res.getColumnIndex('name'))
-    let nameZh = res.getString(res.getColumnIndex('nameZh'))
-    let url = res.getString(res.getColumnIndex('url'))
-    return new DatabaseModel(id, name, nameZh, url)
+    let predicates = new relationalStore.RdbPredicates(this.tableName);
+    predicates.equalTo('id', id);
+    let res = await this.rdbStore?.query(predicates, ['name', 'nameZh', 'url', 'ver']);
+    let name = res.getString(res.getColumnIndex('name'));
+    let nameZh = res.getString(res.getColumnIndex('nameZh'));
+    let url = res.getString(res.getColumnIndex('url'));
+    let ver = res.getString(res.getColumnIndex('ver'));
+    return new DatabaseModel(id, name, nameZh, url, ver);
   }
 
   /**
    * 新增数据库渠道
    * @param db 新的数据库渠道
    */
-  addGroup(db: DatabaseModel) {
-    let id = db.id
-    let name = db.name
-    let nameZh = db.nameZh
-    let url = db.url
-    this.rdbStore?.insert(this.tableName, {'id': id, 'name': name, 'nameZh': nameZh, 'url': url})
+  addDb(db: DatabaseModel) {
+    let id = db.id;
+    let name = db.name;
+    let nameZh = db.nameZh;
+    let url = db.url;
+    let ver = db.ver
+    this.rdbStore?.insert(this.tableName, {'id': id, 'name': name, 'nameZh': nameZh, 'url': url, 'ver': ver});
   }
 
   /**
    * 更新数据库渠道
    * @param db 新的数据库渠道
    */
-  updateGroup(db: DatabaseModel) {
-    let name = db.name
-    let nameZh = db.nameZh
-    let url = db.url
-    let predicates = new relationalStore.RdbPredicates(this.tableName)
-    predicates.equalTo('id', db.id)
-    this.rdbStore?.update({'name': name, 'nameZh': nameZh, 'url': url}, predicates)
+  updateDb(db: DatabaseModel) {
+    let name = db.name;
+    let nameZh = db.nameZh;
+    let url = db.url;
+    let ver = db.ver
+    let predicates = new relationalStore.RdbPredicates(this.tableName);
+    predicates.equalTo('id', db.id);
+    this.rdbStore?.update({'name': name, 'nameZh': nameZh, 'url': url, 'ver': ver}, predicates);
   }
 
   /**
    * 删除数据库渠道
    * @param id 数据库渠道id
    */
-  deleteGroup(id: string){
-    let predicates = new relationalStore.RdbPredicates(this.tableName)
-    predicates.equalTo('id', id)
-    this.rdbStore?.delete(predicates)
+  deleteDb(id: string) {
+    let predicates = new relationalStore.RdbPredicates(this.tableName);
+    predicates.equalTo('id', id);
+    this.rdbStore?.delete(predicates);
+  }
+
+  /**
+   * 判断是否存在指定数据库渠道
+   * @param id 数据库渠道id
+   * @returns 是否存在数据库渠道
+   */
+  async existDb(id: string): Promise<boolean> {
+    let predicates = new relationalStore.RdbPredicates(this.tableName);
+    predicates.equalTo('id', id);
+    let res = await this.rdbStore?.query(predicates);
+    if (res == undefined) {
+      return false;
+    }
+    else {
+      return res.rowCount > 0;
+    }
   }
 }

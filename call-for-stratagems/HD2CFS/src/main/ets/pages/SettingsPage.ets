@@ -29,7 +29,7 @@ import { DividerLine, ListItemGroupHead, PageHead } from "../common/UiUtils";
 @Component
 export struct SettingsPage {
   @Consume('pageInfos') pageInfos: NavPathStack;
-  @State divider: DividerLine = new DividerLine(1, 10, 10, $r('app.color.divider'))
+  divider: DividerLine = new DividerLine(1, 10, 10, $r('app.color.divider'))
 
   build() {
     NavDestination() {
@@ -50,7 +50,7 @@ export struct SettingsPage {
                   })
                     .layoutWeight(2)
                     .onChange((value: string) => {
-                      PreferencesUtil.putVal(PREFERENCES_SERVER_ADDR, value)
+                      PreferencesUtil.putVal(PREFERENCES_SERVER_ADDR, value);
                     })
                   TextInput({
                     placeholder: $r('app.string.set_conn_port'),
@@ -59,7 +59,7 @@ export struct SettingsPage {
                     .type(InputType.Number)
                     .layoutWeight(1)
                     .onChange((value: string) => {
-                      PreferencesUtil.putVal(PREFERENCES_SERVER_PORT, Number(value))
+                      PreferencesUtil.putVal(PREFERENCES_SERVER_PORT, Number(value));
                     })
                 }
               }
@@ -77,7 +77,7 @@ export struct SettingsPage {
                     .type(InputType.Number)
                     .layoutWeight(1)
                     .onChange((value: string) => {
-                      PreferencesUtil.putVal(PREFERENCES_RETRY, Number(value))
+                      PreferencesUtil.putVal(PREFERENCES_RETRY, Number(value));
                     })
                 }
               }
@@ -92,16 +92,16 @@ export struct SettingsPage {
                       Image($r('app.media.ic_scan'))
                         .width(40)
                         .height(40)
-                        .fillColor($r('app.color.hyperlink'))
+                        .fillColor($r("app.color.button_text"))
                       Text($r('app.string.set_conn_scan'))
                         .fontWeight(FontWeight.Medium)
-                        .fontColor($r('app.color.hyperlink'))
+                        .fontColor($r("app.color.button_text"))
                     }
                     .alignItems(HorizontalAlign.Center)
                   }
                   .height("100%")
                   .borderRadius(20)
-                  .backgroundColor($r('app.color.background_primary'))
+                  .backgroundColor($r('app.color.button_background'))
                   .layoutWeight(1)
 
                   // 测试连接
@@ -110,16 +110,16 @@ export struct SettingsPage {
                       Image($r('app.media.ic_sync'))
                         .width(40)
                         .height(40)
-                        .fillColor($r('app.color.hyperlink'))
+                        .fillColor($r("app.color.button_text"))
                       Text($r('app.string.set_conn_test'))
                         .fontWeight(FontWeight.Medium)
-                        .fontColor($r('app.color.hyperlink'))
+                        .fontColor($r("app.color.button_text"))
                     }
                     .alignItems(HorizontalAlign.Center)
                   }
                   .height("100%")
                   .borderRadius(20)
-                  .backgroundColor($r('app.color.background_primary'))
+                  .backgroundColor($r('app.color.button_background'))
                   .layoutWeight(1)
                 }
                 .alignItems(VerticalAlign.Center)
@@ -150,7 +150,7 @@ export struct SettingsPage {
                     .type(InputType.Number)
                     .layoutWeight(1)
                     .onChange((value: string) => {
-                    PreferencesUtil.putVal(PREFERENCES_SYNC_PORT, Number(value))
+                    PreferencesUtil.putVal(PREFERENCES_SYNC_PORT, Number(value));
                   })
                 }
               }
@@ -168,7 +168,7 @@ export struct SettingsPage {
                     .type(InputType.Number)
                     .layoutWeight(1)
                     .onChange((value: string) => {
-                      PreferencesUtil.putVal(PREFERENCES_DELAY, Number(value))
+                      PreferencesUtil.putVal(PREFERENCES_DELAY, Number(value));
                     })
                   Text($r('app.string.set_unit_ms'))
                     .fontColor($r('app.color.text_hint'))
@@ -187,8 +187,8 @@ export struct SettingsPage {
                     .selected(Number(PreferencesUtil.getVal(PREFERENCES_INPUT_OPEN, 2)))
                     .value(PreferencesUtil.getVal(PREFERENCES_INPUT_OPEN_DSP, 'Left Ctrl').toString())
                     .onSelect((index: number, value: string) => {
-                      PreferencesUtil.putVal(PREFERENCES_INPUT_OPEN, index)
-                      PreferencesUtil.putVal(PREFERENCES_INPUT_OPEN_DSP, value)
+                      PreferencesUtil.putVal(PREFERENCES_INPUT_OPEN, index);
+                      PreferencesUtil.putVal(PREFERENCES_INPUT_OPEN_DSP, value);
                     })
                 }
               }
@@ -205,8 +205,8 @@ export struct SettingsPage {
                     .selected(Number(PreferencesUtil.getVal(PREFERENCES_TYPE_OPEN, 0)))
                     .value(PreferencesUtil.getVal(PREFERENCES_TYPE_OPEN_DSP, 'Hold').toString())
                     .onSelect((index: number, value:string) => {
-                      PreferencesUtil.putVal(PREFERENCES_TYPE_OPEN, index)
-                      PreferencesUtil.putVal(PREFERENCES_TYPE_OPEN_DSP, value)
+                      PreferencesUtil.putVal(PREFERENCES_TYPE_OPEN, index);
+                      PreferencesUtil.putVal(PREFERENCES_TYPE_OPEN_DSP, value);
                     })
                 }
               }
@@ -223,8 +223,8 @@ export struct SettingsPage {
                     .selected(Number(PreferencesUtil.getVal(PREFERENCES_INPUT_UP, 42)))
                     .value(PreferencesUtil.getVal(PREFERENCES_INPUT_UP_DSP, 'W').toString())
                     .onSelect((index: number, value: string) => {
-                      PreferencesUtil.putVal(PREFERENCES_INPUT_UP, index)
-                      PreferencesUtil.putVal(PREFERENCES_INPUT_UP_DSP, value)
+                      PreferencesUtil.putVal(PREFERENCES_INPUT_UP, index);
+                      PreferencesUtil.putVal(PREFERENCES_INPUT_UP_DSP, value);
                     })
                 }
               }
@@ -241,8 +241,8 @@ export struct SettingsPage {
                     .selected(Number(PreferencesUtil.getVal(PREFERENCES_INPUT_DOWN, 38)))
                     .value(PreferencesUtil.getVal(PREFERENCES_INPUT_DOWN_DSP, 'S').toString())
                     .onSelect((index: number, value:string) => {
-                      PreferencesUtil.putVal(PREFERENCES_INPUT_DOWN, index)
-                      PreferencesUtil.putVal(PREFERENCES_INPUT_DOWN_DSP, value)
+                      PreferencesUtil.putVal(PREFERENCES_INPUT_DOWN, index);
+                      PreferencesUtil.putVal(PREFERENCES_INPUT_DOWN_DSP, value);
                     })
                 }
               }
@@ -259,8 +259,8 @@ export struct SettingsPage {
                     .selected(Number(PreferencesUtil.getVal(PREFERENCES_INPUT_LEFT, 20)))
                     .value(PreferencesUtil.getVal(PREFERENCES_INPUT_LEFT_DSP, 'A').toString())
                     .onSelect((index: number, value: string) => {
-                      PreferencesUtil.putVal(PREFERENCES_INPUT_LEFT, index)
-                      PreferencesUtil.putVal(PREFERENCES_INPUT_LEFT_DSP, value)
+                      PreferencesUtil.putVal(PREFERENCES_INPUT_LEFT, index);
+                      PreferencesUtil.putVal(PREFERENCES_INPUT_LEFT_DSP, value);;;
                     })
                 }
               }
@@ -277,8 +277,8 @@ export struct SettingsPage {
                     .selected(Number(PreferencesUtil.getVal(PREFERENCES_INPUT_RIGHT, 23)))
                     .value(PreferencesUtil.getVal(PREFERENCES_INPUT_RIGHT_DSP, 'D').toString())
                     .onSelect((index: number, value: string) => {
-                      PreferencesUtil.putVal(PREFERENCES_INPUT_RIGHT, index)
-                      PreferencesUtil.putVal(PREFERENCES_INPUT_RIGHT_DSP, value)
+                      PreferencesUtil.putVal(PREFERENCES_INPUT_RIGHT, index);
+                      PreferencesUtil.putVal(PREFERENCES_INPUT_RIGHT_DSP, value);
                     })
                 }
               }
@@ -290,7 +290,7 @@ export struct SettingsPage {
                   Row({ space: 6 }) {
                     Text($r('app.string.set_sync_apply'))
                       .fontWeight(FontWeight.Medium)
-                      .fontColor($r('app.color.hyperlink'))
+                      .fontColor($r("app.color.button_text"))
                   }
                   .alignItems(VerticalAlign.Center)
                 }
@@ -298,7 +298,7 @@ export struct SettingsPage {
                 .width("100%")
                 .height(60)
                 .borderRadius(20)
-                .backgroundColor($r('app.color.background_primary'))
+                .backgroundColor($r('app.color.button_background'))
                 .padding(10)
               }
             }
@@ -331,7 +331,7 @@ export struct SettingsPage {
                     isOn: Boolean(PreferencesUtil.getVal(PREFERENCES_SIMPLIFIED_MODE, false))
                   })
                     .onChange((isOn: boolean) => {
-                      PreferencesUtil.putVal(PREFERENCES_SIMPLIFIED_MODE, isOn)
+                      PreferencesUtil.putVal(PREFERENCES_SIMPLIFIED_MODE, isOn);
                     })
                 }
                 .width("100%")
@@ -350,8 +350,8 @@ export struct SettingsPage {
                     .selected(Number(PreferencesUtil.getVal(PREFERENCES_LANG_STRATAGEM, 0)))
                     .value(PreferencesUtil.getVal(PREFERENCES_LANG_STRATAGEM_DSP, 'System Language').toString())
                     .onSelect((index: number, value: string) => {
-                      PreferencesUtil.putVal(PREFERENCES_LANG_STRATAGEM, index)
-                      PreferencesUtil.putVal(PREFERENCES_LANG_STRATAGEM_DSP, value)
+                      PreferencesUtil.putVal(PREFERENCES_LANG_STRATAGEM, index);
+                      PreferencesUtil.putVal(PREFERENCES_LANG_STRATAGEM_DSP, value);
                     })
                 }
               }
@@ -375,7 +375,7 @@ export struct SettingsPage {
                   Row() {
                     Column() {
                       Text($r('app.string.set_info_db'))
-                        .fontColor($r('app.color.hyperlink'))
+                        .fontColor($r("app.color.button_text"))
                         .fontWeight(FontWeight.Medium)
                       Text("[hd2_db] 2024-12-26T14:02:42Z")
                         .fontColor($r('app.color.text_hint'))
@@ -393,8 +393,11 @@ export struct SettingsPage {
                 .width("100%")
                 .height(60)
                 .borderRadius(20)
-                .backgroundColor($r('app.color.background_primary'))
+                .backgroundColor($r('app.color.button_background'))
                 .padding(10)
+                .onClick(() => {
+                  this.pageInfos.pushPath({ name: "DatabasePage"});
+                })
               }
 
               // 软件
@@ -403,7 +406,7 @@ export struct SettingsPage {
                   Row() {
                     Column() {
                       Text($r('app.string.set_info_app'))
-                        .fontColor($r('app.color.hyperlink'))
+                        .fontColor($r("app.color.button_text"))
                         .fontWeight(FontWeight.Medium)
                       Text("v1.0.0")
                         .fontColor($r('app.color.text_hint'))
@@ -421,7 +424,7 @@ export struct SettingsPage {
                 .width("100%")
                 .height(60)
                 .borderRadius(20)
-                .backgroundColor($r('app.color.background_primary'))
+                .backgroundColor($r('app.color.button_background'))
                 .padding(10)
               }
 
@@ -429,14 +432,14 @@ export struct SettingsPage {
               ListItem() {
                 Button({ type: ButtonType.Normal, stateEffect: true }) {
                   Text($r('app.string.set_info_about'))
-                    .fontColor($r('app.color.hyperlink'))
+                    .fontColor($r("app.color.button_text"))
                     .fontWeight(FontWeight.Medium)
                 }
                 .align(Alignment.Start)
                 .width("100%")
                 .height(60)
                 .borderRadius(20)
-                .backgroundColor($r('app.color.background_primary'))
+                .backgroundColor($r('app.color.button_background'))
                 .padding(10)
               }
             }
@@ -455,8 +458,8 @@ export struct SettingsPage {
     }
     .title(PageHead($r('app.string.set_page_title')))
     .onBackPressed(() => {
-      this.pageInfos.pop()
-      return true
+      this.pageInfos.pop();
+      return true;
     })
     .backgroundColor($r('app.color.background_secondary'))
   }

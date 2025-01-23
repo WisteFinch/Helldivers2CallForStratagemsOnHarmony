@@ -2,6 +2,8 @@ import { DatabaseDao } from './dao/DatabaseDao'
 import { GroupDao } from './dao/GroupDao'
 import { GroupStratagemsDao } from './dao/GroupStratagemsDao'
 import { StratagemDao } from './dao/StratagemDao'
+import DatabaseModel from './model/DatabaseModel'
+import StratagemModel from './model/StratagemModel'
 
 /**
  * 数据库服务
@@ -15,10 +17,34 @@ class DatabaseService {
 
   initDBService(context: Context) {
     // 初始化数据访问层
-    this.groupDao.init(context)
-    this.stratagemDao.init(context)
-    this.groupStratagemsDao.init(context)
-    this.databaseDao.init(context)
+    this.groupDao.init(context);
+    this.stratagemDao.init(context);
+    this.groupStratagemsDao.init(context);
+    this.databaseDao.init(context);
+  }
+
+  async GetDbList(): Promise<DatabaseModel[]> {
+    return await this.databaseDao.getDBList();
+  }
+
+  async addDb(db: DatabaseModel) {
+    let value = await this.databaseDao.existDb(db.id);
+    if (value) {
+      this.databaseDao.updateDb(db);
+    }
+    else {
+      this.databaseDao.addDb(db);
+    }
+  }
+
+  async addStratagem(stratagem: StratagemModel) {
+    let value = await this.stratagemDao.existStratagem(stratagem.id, stratagem.dbId);
+    if (value) {
+      this.stratagemDao.updateStratagem(stratagem);
+    }
+    else {
+      this.stratagemDao.addStratagem(stratagem);
+    }
   }
 }
 

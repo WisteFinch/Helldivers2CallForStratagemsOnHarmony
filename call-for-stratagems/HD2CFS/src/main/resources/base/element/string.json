@@ -175,6 +175,78 @@
     {
       "name": "about_page_title",
       "value": "About"
+    },
+    {
+      "name": "db_page_title",
+      "value": "Database"
+    },
+    {
+      "name": "db_add_title",
+      "value": "Add Database Channel"
+    },
+    {
+      "name": "db_add_hint",
+      "value": "Database URL"
+    },
+    {
+      "name": "dialog_cancel",
+      "value": "Cancel"
+    },
+    {
+      "name": "dialog_accept",
+      "value": "Accept"
+    },
+    {
+      "name": "dialog_ignore",
+      "value": "Ignore"
+    },
+    {
+      "name": "db_updt_idle",
+      "value": "Waiting: %s"
+    },
+    {
+      "name": "db_updt_dl_idx",
+      "value": "Downloading Index: %s"
+    },
+    {
+      "name": "db_updt_dl_db",
+      "value": "Downloading Database: %s"
+    },
+    {
+      "name": "db_updt_done",
+      "value": "Done: %s"
+    },
+    {
+      "name": "db_updt_title",
+      "value": "Update Database"
+    },
+    {
+      "name": "db_updt_task",
+      "value": "Tasks (%s/%s)"
+    },
+    {
+      "name": "db_updt_dl_img",
+      "value": "Downloading Images (%s/%s): %s"
+    },
+    {
+      "name": "db_updt_err_parse_idx",
+      "value": "Error Parsing Index: %s"
+    },
+    {
+      "name": "db_updt_err_dl_db",
+      "value": "Error Downloading Database: %s"
+    },
+    {
+      "name": "db_updt_err_parse_db",
+      "value": "Error Parsing Database: %s"
+    },
+    {
+      "name": "db_updt_err_dl_img",
+      "value": "Error Downloading Image: %s"
+    },
+    {
+      "name": "db_updt_err_dl_idx",
+      "value": "Error Downloading Index: %s"
     }
   ]
 }

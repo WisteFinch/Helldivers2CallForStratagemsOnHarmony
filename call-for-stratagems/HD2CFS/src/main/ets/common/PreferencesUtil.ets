@@ -10,8 +10,8 @@ class PreferencesUtil {
    * @param context
    */
   loadPreference(context: Context) {
-    let name = PREFERENCES_FILE_NAME
-    this.pref = preferences.getPreferencesSync(context, { name })
+    let name = PREFERENCES_FILE_NAME;
+    this.pref = preferences.getPreferencesSync(context, { name });
   }
 
   /**
@@ -20,8 +20,8 @@ class PreferencesUtil {
    * @param value 值
    */
   putVal(key: string, value: preferences.ValueType) {
-    this.pref?.putSync(key, value)
-    this.pref?.flush()
+    this.pref?.putSync(key, value);
+    this.pref?.flush();
   }
 
   /**
@@ -33,11 +33,11 @@ class PreferencesUtil {
   getVal(key: string, defaultVal: preferences.ValueType): preferences.ValueType {
     try {
       if (this.pref == null) {
-        return defaultVal
+        return defaultVal;
       }
-      return this.pref.getSync(key, defaultVal)
+      return this.pref.getSync(key, defaultVal);
     }catch (e){
-      return defaultVal
+      return defaultVal;
     }
   }
 }

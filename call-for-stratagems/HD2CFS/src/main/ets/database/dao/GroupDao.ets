@@ -14,7 +14,7 @@ export class GroupDao {
     // 表SQL
     const sql = `CREATE TABLE IF NOT EXISTS stratagem_group (
                   id INTEGER PRIMARY KEY AUTOINCREMENT,
-                  name TEXT)`
+                  name TEXT)`;
     // 创建表
     relationalStore.getRdbStore(context, {
       name: DATABASE_NAME,
@@ -23,7 +23,7 @@ export class GroupDao {
       (_err, rdbStore) => {
       rdbStore.executeSql(sql)
       this.rdbStore = rdbStore
-    })
+    });
   }
 
   /**
@@ -32,18 +32,18 @@ export class GroupDao {
    */
   async getGroupList(): Promise<GroupModel[]> {
     if (this.rdbStore == null) {
-      return []
+      return [];
     }
-    let predicates = new relationalStore.RdbPredicates(this.tableName)
-    let res = await this.rdbStore?.query(predicates, ['id', 'name'])
-    let groups: GroupModel[] = []
+    let predicates = new relationalStore.RdbPredicates(this.tableName);
+    let res = await this.rdbStore?.query(predicates, ['id', 'name']);
+    let groups: GroupModel[] = [];
     while(!res.isAtLastRow){
-      res.goToNextRow()
-      let id = res.getLong(res.getColumnIndex('id'))
-      let name = res.getString(res.getColumnIndex('name'))
-      groups.push(new GroupModel(id, name, []))
+      res.goToNextRow();
+      let id = res.getLong(res.getColumnIndex('id'));
+      let name = res.getString(res.getColumnIndex('name'));
+      groups.push(new GroupModel(id, name, []));
     }
-    return groups
+    return groups;
   }
 
   /**
@@ -53,13 +53,13 @@ export class GroupDao {
    */
   async getGroup(id: number): Promise<GroupModel>{
     if (this.rdbStore == null) {
-      return new GroupModel(-1, 'null', [])
+      return new GroupModel(-1, 'null', []);
     }
-    let predicates = new relationalStore.RdbPredicates(this.tableName)
-    predicates.equalTo('id', id)
-    let res = await this.rdbStore?.query(predicates, ['name', 'list'])
-    let name = res.getString(res.getColumnIndex('name'))
-    return new GroupModel(id, name, [])
+    let predicates = new relationalStore.RdbPredicates(this.tableName);
+    predicates.equalTo('id', id);
+    let res = await this.rdbStore?.query(predicates, ['name', 'list']);
+    let name = res.getString(res.getColumnIndex('name'));
+    return new GroupModel(id, name, []);
   }
 
   /**
@@ -67,9 +67,9 @@ export class GroupDao {
    * @param group 新的战备组
    */
   addGroup(group: GroupModel) {
-    let id = group.id
-    let name = group.name
-    this.rdbStore?.insert(this.tableName, {'id': id, 'name': name})
+    let id = group.id;
+    let name = group.name;
+    this.rdbStore?.insert(this.tableName, {'id': id, 'name': name});
   }
 
   /**
@@ -77,10 +77,10 @@ export class GroupDao {
    * @param group 新的战备组
    */
   updateGroup(group: GroupModel) {
-    let name = group.name
-    let predicates = new relationalStore.RdbPredicates(this.tableName)
-    predicates.equalTo('id', group.id)
-    this.rdbStore?.update({'name': name}, predicates)
+    let name = group.name;
+    let predicates = new relationalStore.RdbPredicates(this.tableName);
+    predicates.equalTo('id', group.id);
+    this.rdbStore?.update({'name': name}, predicates);
   }
 
   /**
@@ -88,8 +88,8 @@ export class GroupDao {
    * @param id 战备组id
    */
   deleteGroup(id: number){
-    let predicates = new relationalStore.RdbPredicates(this.tableName)
-    predicates.equalTo('id', id)
-    this.rdbStore?.delete(predicates)
+    let predicates = new relationalStore.RdbPredicates(this.tableName);
+    predicates.equalTo('id', id);
+    this.rdbStore?.delete(predicates);
   }
 }

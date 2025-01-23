@@ -1,7 +1,7 @@
 {
   "color": [
     {
-      "name": "start_window_background",
+      "name": "white",
       "value": "#FFFFFF"
     },
     {
@@ -9,85 +9,28 @@
       "value": "#FF000000"
     },
     {
+      "name": "start_window_background",
+      "value": "$color:white"
+    },
+    {
+      "name": "background_primary",
+      "value": "$color:white"
+    },
+    {
+      "name": "background_secondary",
+      "value": "#F1F3F5"
+    },
+    {
       "name": "text_primary",
-      "value": "#000000"
-    },
-
-    {
-      "name": "primary_dark",
-      "value": "#5D2080"
-    },
-    {
-      "name": "primary",
-      "value": "#FF6D4490"
-    },
-    {
-      "name": "accent",
-      "value": "#FFDCAEEE"
-    },
-    {
-      "name": "yellow",
-      "value": "#FFF17F"
-    },
-    {
-      "name": "light_yellow",
-      "value": "#FBF9AF"
-    },
-    {
-      "name": "orange",
-      "value": "#FDC363"
-    },
-    {
-      "name": "pink",
-      "value": "#F7438C"
-    },
-    {
-      "name": "light_pink",
-      "value": "#FCB8D9"
-    },
-    {
-      "name": "background_1",
-      "value": "#171A27"
-    },
-    {
-      "name": "dark_blue",
-      "value": "#373A77"
-    },
-    {
-      "name": "blue",
-      "value": "#269DCE"
-    },
-    {
-      "name": "light_blue",
-      "value": "#A3DEF8"
+      "value": "$color:black"
     },
     {
       "name": "text_secondary",
       "value": "#ABAAB2"
     },
     {
-      "name": "light_grey",
-      "value": "#F1F1F3"
-    },
-    {
-      "name": "window_background",
-      "value": "#061015"
-    },
-    {
-      "name": "green",
-      "value": "#67CA50"
-    },
-    {
-      "name": "red",
-      "value": "#DB2D43"
-    },
-    {
-      "name": "background_primary",
-      "value": "#FFFFFF"
-    },
-    {
-      "name": "background_secondary",
-      "value": "#F1F3F5"
+      "name": "text_hyperlink",
+      "value": "#0a59f7"
     },
     {
       "name": "text_hint",
@@ -98,8 +41,12 @@
       "value": "#e9f0f0"
     },
     {
-      "name": "hyperlink",
-      "value": "#0a59f7"
+      "name": "button_background",
+      "value": "$color:background_primary"
+    },
+    {
+      "name": "button_text",
+      "value": "$color:text_hyperlink"
     }
   ]
 }

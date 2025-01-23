@@ -1,3 +1,6 @@
+import { DatabaseUpdateDialog } from "../common/DatabaseUpdateDialog";
+import { TextInputDialog } from "../common/UiUtils";
+import { DatabasePage } from "./DatabasePage";
 import { SettingsPage } from "./SettingsPage";
 
 @Entry
@@ -9,6 +12,9 @@ struct RootPage {
   PageMap(name: string) {
     if (name === "SettingsPage") {
       SettingsPage()
+    }
+    else if (name === "DatabasePage") {
+      DatabasePage()
     }
   }
 
@@ -38,14 +44,13 @@ struct RootPage {
           value: "",
           icon: "resources/base/media/ic_list.svg",
           action: ()=> {
-
           }
         },
         {
           value: "",
           icon: 'resources/base/media/ic_settings.svg',
           action: ()=> {
-            this.pageInfos.pushPath({ name: "SettingsPage"})
+            this.pageInfos.pushPath({ name: "SettingsPage"});
           }
         }
       ])

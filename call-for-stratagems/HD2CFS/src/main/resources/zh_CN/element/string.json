@@ -167,6 +167,78 @@
     {
       "name": "about_page_title",
       "value": "关于"
+    },
+    {
+      "name": "db_page_title",
+      "value": "数据库"
+    },
+    {
+      "name": "db_add_title",
+      "value": "添加数据库渠道"
+    },
+    {
+      "name": "db_add_hint",
+      "value": "数据库地址"
+    },
+    {
+      "name": "dialog_cancel",
+      "value": "取消"
+    },
+    {
+      "name": "dialog_accept",
+      "value": "确定"
+    },
+    {
+      "name": "dialog_ignore",
+      "value": "忽略"
+    },
+    {
+      "name": "db_updt_idle",
+      "value": "等待: %s"
+    },
+    {
+      "name": "db_updt_dl_idx",
+      "value": "下载索引：%s"
+    },
+    {
+      "name": "db_updt_dl_db",
+      "value": "下载数据库：%s"
+    },
+    {
+      "name": "db_updt_done",
+      "value": "完成：%s"
+    },
+    {
+      "name": "db_updt_title",
+      "value": "更新数据库"
+    },
+    {
+      "name": "db_updt_task",
+      "value": "任务（%s/%s）"
+    },
+    {
+      "name": "db_updt_dl_img",
+      "value": "下载图像（%s/%s）： %s"
+    },
+    {
+      "name": "db_updt_err_dl_db",
+      "value": "下载数据库时出错：%s"
+    },
+    {
+      "name": "db_updt_err_dl_idx",
+      "value": "下载索引时出错：%s"
+    },
+    {
+      "name": "db_updt_err_dl_img",
+      "value": "下载图像时出错：%s"
+    },
+    {
+      "name": "db_updt_err_parse_db",
+      "value": "解析数据库时出错：%s"
+    },
+    {
+      "name": "db_updt_err_parse_idx",
+      "value": "解析索引时出错：%s"
     }
   ]
 }

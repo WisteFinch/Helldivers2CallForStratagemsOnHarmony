@@ -16,7 +16,7 @@ export class GroupStratagemsDao {
                   id INTEGER PRIMARY KEY AUTOINCREMENT,
                   groupId INTEGER,
                   stratagemId INTEGER,
-                  dbId TEXT)`
+                  dbId TEXT)`;
     // 创建表
     relationalStore.getRdbStore(context, {
       name: DATABASE_NAME,
@@ -25,7 +25,7 @@ export class GroupStratagemsDao {
       (_err, rdbStore) => {
         rdbStore.executeSql(sql)
         this.rdbStore = rdbStore
-      })
+      });
   }
 
   /**
@@ -34,18 +34,18 @@ export class GroupStratagemsDao {
    */
   async getList(): Promise<GroupStratagemsModel[]> {
     if (this.rdbStore == null) {
-      return []
+      return [];
     }
-    let predicates = new relationalStore.RdbPredicates(this.tableName)
-    let res = await this.rdbStore?.query(predicates, ['id', 'groupId', 'stratagemId', 'dbId'])
-    let list: GroupStratagemsModel[] = []
+    let predicates = new relationalStore.RdbPredicates(this.tableName);
+    let res = await this.rdbStore?.query(predicates, ['id', 'groupId', 'stratagemId', 'dbId']);
+    let list: GroupStratagemsModel[] = [];
     while(!res.isAtLastRow){
-      res.goToNextRow()
-      let id = res.getLong(res.getColumnIndex('id'))
-      let groupId = res.getLong(res.getColumnIndex('groupId'))
-      let stratagemId = res.getLong(res.getColumnIndex('stratagemId'))
-      let dbId = res.getString(res.getColumnIndex('dbId'))
-      list.push(new GroupStratagemsModel(id, groupId, stratagemId, dbId))
+      res.goToNextRow();
+      let id = res.getLong(res.getColumnIndex('id'));
+      let groupId = res.getLong(res.getColumnIndex('groupId'));
+      let stratagemId = res.getLong(res.getColumnIndex('stratagemId'));
+      let dbId = res.getString(res.getColumnIndex('dbId'));
+      list.push(new GroupStratagemsModel(id, groupId, stratagemId, dbId));
     }
     return list
   }
@@ -57,20 +57,20 @@ export class GroupStratagemsDao {
    */
   async getListByGroupId(groupId: number): Promise<GroupStratagemsModel[]>{
     if (this.rdbStore == null) {
-      return []
+      return [];
     }
-    let predicates = new relationalStore.RdbPredicates(this.tableName)
-    predicates.equalTo('groupId', groupId)
-    let res = await this.rdbStore?.query(predicates, ['id', 'stratagemId', 'dbId'])
-    let list: GroupStratagemsModel[] = []
+    let predicates = new relationalStore.RdbPredicates(this.tableName);
+    predicates.equalTo('groupId', groupId);
+    let res = await this.rdbStore?.query(predicates, ['id', 'stratagemId', 'dbId']);
+    let list: GroupStratagemsModel[] = [];
     while(!res.isAtLastRow){
-      res.goToNextRow()
-      let id = res.getLong(res.getColumnIndex('id'))
-      let stratagemId = res.getLong(res.getColumnIndex('stratagemId'))
-      let dbId = res.getString(res.getColumnIndex('dbId'))
-      list.push(new GroupStratagemsModel(id, groupId, stratagemId, dbId))
+      res.goToNextRow();
+      let id = res.getLong(res.getColumnIndex('id'));
+      let stratagemId = res.getLong(res.getColumnIndex('stratagemId'));
+      let dbId = res.getString(res.getColumnIndex('dbId'));
+      list.push(new GroupStratagemsModel(id, groupId, stratagemId, dbId));
     }
-    return list
+    return list;
   }
 
   /**
@@ -78,11 +78,11 @@ export class GroupStratagemsDao {
    * @param db 新的战备组-战备
    */
   addGroup(gs: GroupStratagemsModel) {
-    let id = gs.id
-    let groupId = gs.groupId
-    let stratagemId = gs.stratagemId
-    let dbId = gs.dbId
-    this.rdbStore?.insert(this.tableName, {'id': id, 'groupId': groupId, 'stratagemId': stratagemId, 'dbId': dbId})
+    let id = gs.id;
+    let groupId = gs.groupId;
+    let stratagemId = gs.stratagemId;
+    let dbId = gs.dbId;
+    this.rdbStore?.insert(this.tableName, {'id': id, 'groupId': groupId, 'stratagemId': stratagemId, 'dbId': dbId});
   }
 
   /**
@@ -90,8 +90,8 @@ export class GroupStratagemsDao {
    * @param groupId 战备组id
    */
   deleteGroup(groupId: number){
-    let predicates = new relationalStore.RdbPredicates(this.tableName)
-    predicates.equalTo('groupId', groupId)
-    this.rdbStore?.delete(predicates)
+    let predicates = new relationalStore.RdbPredicates(this.tableName);
+    predicates.equalTo('groupId', groupId);
+    this.rdbStore?.delete(predicates);
   }
 }
