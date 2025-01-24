@@ -182,7 +182,7 @@
     },
     {
       "name": "db_add_title",
-      "value": "Add Database Channel"
+      "value": "Add Database"
     },
     {
       "name": "db_add_hint",
@@ -247,6 +247,46 @@
     {
       "name": "db_updt_err_dl_idx",
       "value": "Error Downloading Index: %s"
+    },
+    {
+      "name": "db_updt_err_parse_stratagem",
+      "value": "Error Parsing Stratagem: %s"
+    },
+    {
+      "name": "db_updt_err",
+      "value": "Update Failed: %s"
+    },
+    {
+      "name": "db_ver_null",
+      "value": "Incomplete Database"
+    },
+    {
+      "name": "db_info_id",
+      "value": "ID: %s"
+    },
+    {
+      "name": "db_info_name",
+      "value": "Name: %s"
+    },
+    {
+      "name": "db_info_ver",
+      "value": "Version: %s"
+    },
+    {
+      "name": "db_info_url",
+      "value": "URL: %s"
+    },
+    {
+      "name": "dialog_delete",
+      "value": "Delete"
+    },
+    {
+      "name": "db_info_title",
+      "value": "Database Information"
+    },
+    {
+      "name": "db_updt_latest",
+      "value": "Latest: %s"
     }
   ]
 }

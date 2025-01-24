@@ -37,6 +37,10 @@
       "value": "#606162"
     },
     {
+      "name": "text_alert",
+      "value": "#EE0000"
+    },
+    {
       "name": "divider",
       "value": "#e9f0f0"
     },
@@ -47,6 +51,10 @@
     {
       "name": "button_text",
       "value": "$color:text_hyperlink"
+    },
+    {
+      "name": "button_text_alert",
+      "value": "$color:text_alert"
     }
   ]
 }

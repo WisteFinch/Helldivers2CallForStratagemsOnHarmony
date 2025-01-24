@@ -1,7 +1,7 @@
-import util from '@ohos.util'
-import { rcp } from '@kit.RemoteCommunicationKit'
-import { request } from '@kit.BasicServicesKit';
-import fs from '@ohos.file.fs'
+import util from "@ohos.util"
+import { rcp } from "@kit.RemoteCommunicationKit"
+import { request } from "@kit.BasicServicesKit"
+import fs from "@ohos.file.fs"
 
 export async function fetchData(url: string): Promise<string> {
   const request = new rcp.Request(url, 'GET');

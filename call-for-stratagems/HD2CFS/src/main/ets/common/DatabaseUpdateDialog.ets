@@ -1,11 +1,12 @@
-import DatabaseService from "../database/DatabaseService"
-import DatabaseModel from "../database/model/DatabaseModel"
-import StratagemModel from "../database/model/StratagemModel"
-import { downloadToFileDir, fetchData } from "./HttpUtils"
+import DatabaseService from '../database/DatabaseService'
+import DatabaseModel from '../database/model/DatabaseModel'
+import StratagemModel from '../database/model/StratagemModel'
+import { downloadToFileDir, fetchData } from './HttpUtils'
 
 enum UpdateStage {
   Idle,
   DownloadingIndex,
+  Latest,
   DownloadingDb,
   DownloadingImg,
   Done,
@@ -13,11 +14,13 @@ enum UpdateStage {
 }
 
 enum UpdateErr {
+  Err,
   DownloadIndexErr,
   ParseIndexErr,
   DownloadDbErr,
   ParseDbErr,
-  DownloadImgErr
+  DownloadImgErr,
+  ParseStratagemErr
 }
 
 class TaskItem {
@@ -36,13 +39,13 @@ class TaskItem {
 @CustomDialog
 export struct DatabaseUpdateDialog {
   controller: CustomDialogController
-  confirm: (value: string) => void = () => {
+  confirm: () => void = () => {
   }
-  title: ResourceStr = $r('app.string.db_updt_title')
   @Link tasks: string[]
   @State _tasks: TaskItem[] = []
   @State taskIndex: number = 0
   @State finished: boolean = false
+  cancel: boolean = false
 
   /**
    * 更新数据库
@@ -56,6 +59,9 @@ export struct DatabaseUpdateDialog {
         }
 
         // 获取索引信息
+        if (this.cancel) {
+          return;
+        }
         this._tasks[this.taskIndex].stage = UpdateStage.DownloadingIndex;
         this._tasks[this.taskIndex].txt = baseUrl;
         this._tasks = [...this._tasks];
@@ -66,6 +72,9 @@ export struct DatabaseUpdateDialog {
           throw new Error(UpdateErr.DownloadIndexErr.toString());
         }
         // 解析索引信息
+        if (this.cancel) {
+          return;
+        }
         let indexJson: object;
         try {
           indexJson = JSON.parse(indexRes);
@@ -81,9 +90,21 @@ export struct DatabaseUpdateDialog {
         if (dbId == undefined) {
           throw new Error(UpdateErr.ParseIndexErr.toString());
         }
-        await DatabaseService.addDb(new DatabaseModel(dbId, dbName, dbNameZh, baseUrl, '0'));
+        let oldDb = await DatabaseService.GetDb(dbId);
+        if (oldDb.id == dbId && oldDb.ver == date) {
+          this._tasks[this.taskIndex].stage = UpdateStage.Latest;
+          this._tasks[this.taskIndex].txt = dbId;
+          this._tasks[this.taskIndex].index = this._tasks[this.taskIndex].count = 1;
+          this._tasks = [...this._tasks];
+          continue;
+        }
+        DatabaseService.deleteStratagems(dbId);
+        await DatabaseService.addDb(new DatabaseModel(dbId, dbName, dbNameZh, baseUrl, 'null'));
 
         // 获取数据库信息
+        if (this.cancel) {
+          return;
+        }
         this._tasks[this.taskIndex].stage = UpdateStage.DownloadingDb;
         this._tasks[this.taskIndex].txt = dbUrl;
         this._tasks = [...this._tasks];
@@ -94,6 +115,9 @@ export struct DatabaseUpdateDialog {
           throw new Error(UpdateErr.DownloadDbErr.toString());
         }
         // 解析数据库信息
+        if (this.cancel) {
+          return;
+        }
         let dbObjs: object[];
         try {
           dbObjs = JSON.parse(dbRes)['objects'][0]['rows'];
@@ -110,13 +134,22 @@ export struct DatabaseUpdateDialog {
         this._tasks = [...this._tasks];
         for (this._tasks[this.taskIndex].index = 0; this._tasks[this.taskIndex].index < this._tasks[this.taskIndex].count;
           this._tasks[this.taskIndex].index++) {
+          if (this.cancel) {
+            return;
+          }
           const row = dbObjs[this._tasks[this.taskIndex].index];
-          const stratagem: StratagemModel = new StratagemModel(row[0],
-            dbId,
-            row[1],
-            row[2],
-            row[3],
-            JSON.parse(row[4])); /*TODO: 解析错误检查*/
+          let stratagem: StratagemModel;
+          try {
+            this._tasks[this.taskIndex].txt = row[1];
+            stratagem = new StratagemModel(row[0],
+              dbId,
+              row[1],
+              row[2],
+              row[3],
+              JSON.parse(row[4]));
+          } catch (_err) {
+            throw new Error(UpdateErr.ParseStratagemErr.toString());
+          }
           this._tasks[this.taskIndex].txt = `${iconUrl}${stratagem.icon}.svg`;
           this._tasks = [...this._tasks];
           // 下载图像资源
@@ -128,13 +161,20 @@ export struct DatabaseUpdateDialog {
           await DatabaseService.addStratagem(stratagem);
         }
         // 更新数据库
+        if (this.cancel) {
+          return;
+        }
         await DatabaseService.addDb(new DatabaseModel(dbId, dbName, dbNameZh, baseUrl, date));
         this._tasks[this.taskIndex].stage = UpdateStage.Done;
         this._tasks[this.taskIndex].txt = dbId;
         this._tasks = [...this._tasks];
       } catch (err) {
         this._tasks[this.taskIndex].stage = UpdateStage.Err;
-        this._tasks[this.taskIndex].err = (err as Error).message;
+        if (err == Error) {
+          this._tasks[this.taskIndex].err = (err as Error).message;
+        } else {
+          this._tasks[this.taskIndex].err = UpdateErr.Err.toString()
+        }
         this._tasks = [...this._tasks];
       }
     }
@@ -148,9 +188,14 @@ export struct DatabaseUpdateDialog {
     this.update()
   }
 
+  aboutToDisappear(): void {
+    this.cancel = true;
+    this.confirm();
+  }
+
   build() {
     Column({ space: 20 }) {
-      Text(this.title)
+      Text($r('app.string.db_updt_title'))
         .fontSize(20)
         .fontWeight(FontWeight.Medium)
       Column() {
@@ -165,6 +210,8 @@ export struct DatabaseUpdateDialog {
             Text($r('app.string.db_updt_idle', this._tasks[index].url))
           } else if (this._tasks[index].stage == UpdateStage.DownloadingIndex) {
             Text($r('app.string.db_updt_dl_idx', this._tasks[index].txt))
+          } else if (this._tasks[index].stage == UpdateStage.Latest) {
+            Text($r('app.string.db_updt_latest', this._tasks[index].txt))
           } else if (this._tasks[index].stage == UpdateStage.DownloadingDb) {
             Text($r('app.string.db_updt_dl_db', this._tasks[index].txt))
           } else if (this._tasks[index].stage == UpdateStage.DownloadingImg) {
@@ -183,6 +230,10 @@ export struct DatabaseUpdateDialog {
               Text($r('app.string.db_updt_err_parse_db', this._tasks[index].txt))
             } else if (this._tasks[index].err == UpdateErr.DownloadImgErr.toString()) {
               Text($r('app.string.db_updt_err_dl_img', this._tasks[index].txt))
+            } else if (this._tasks[index].err == UpdateErr.ParseStratagemErr.toString()) {
+              Text($r('app.string.db_updt_err_parse_stratagem', this._tasks[index].txt))
+            } else {
+              Text($r('app.string.db_updt_err', this._tasks[index].url))
             }
           }
           Progress({ value: this._tasks[index].index, total: this._tasks[index].count })
@@ -193,7 +244,7 @@ export struct DatabaseUpdateDialog {
         if (this.finished) { // 更新完成
           Button($r('app.string.dialog_accept'))
             .onClick(() => {
-              this.controller.close()
+              this.controller.close();
             })
             .fontColor($r('app.color.button_text'))
             .backgroundColor($r('app.color.button_background'))
@@ -201,10 +252,9 @@ export struct DatabaseUpdateDialog {
         } else { // 取消更新
           Button($r('app.string.dialog_cancel'))
             .onClick(() => {
-              /*TODO: 取消更新*/
-              this.controller.close()
+              this.controller.close();
             })
-            .fontColor($r('app.color.button_text'))
+            .fontColor($r('app.color.button_text_alert'))
             .backgroundColor($r('app.color.button_background'))
             .layoutWeight(1)
         }

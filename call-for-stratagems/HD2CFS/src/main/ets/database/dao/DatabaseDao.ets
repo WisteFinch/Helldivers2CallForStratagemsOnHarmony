@@ -64,11 +64,16 @@ export class DatabaseDao {
     let predicates = new relationalStore.RdbPredicates(this.tableName);
     predicates.equalTo('id', id);
     let res = await this.rdbStore?.query(predicates, ['name', 'nameZh', 'url', 'ver']);
-    let name = res.getString(res.getColumnIndex('name'));
-    let nameZh = res.getString(res.getColumnIndex('nameZh'));
-    let url = res.getString(res.getColumnIndex('url'));
-    let ver = res.getString(res.getColumnIndex('ver'));
-    return new DatabaseModel(id, name, nameZh, url, ver);
+    if (res.isAtLastRow) {
+      return new DatabaseModel('null', 'null', 'null', 'null', 'null');
+    } else {
+      res.goToNextRow();
+      let name = res.getString(res.getColumnIndex('name'));
+      let nameZh = res.getString(res.getColumnIndex('nameZh'));
+      let url = res.getString(res.getColumnIndex('url'));
+      let ver = res.getString(res.getColumnIndex('ver'));
+      return new DatabaseModel(id, name, nameZh, url, ver);
+    }
   }
 
   /**
@@ -102,10 +107,10 @@ export class DatabaseDao {
    * 删除数据库渠道
    * @param id 数据库渠道id
    */
-  deleteDb(id: string) {
+  async deleteDb(id: string) {
     let predicates = new relationalStore.RdbPredicates(this.tableName);
     predicates.equalTo('id', id);
-    this.rdbStore?.delete(predicates);
+    await this.rdbStore?.delete(predicates);
   }
 
   /**

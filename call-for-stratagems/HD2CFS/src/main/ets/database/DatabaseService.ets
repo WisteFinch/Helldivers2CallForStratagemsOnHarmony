@@ -15,6 +15,10 @@ class DatabaseService {
   private groupStratagemsDao: GroupStratagemsDao = new GroupStratagemsDao()
   private databaseDao: DatabaseDao = new DatabaseDao()
 
+  /**
+   * 初始化数据库服务
+   * @param context 上下文
+   */
   initDBService(context: Context) {
     // 初始化数据访问层
     this.groupDao.init(context);
@@ -23,10 +27,27 @@ class DatabaseService {
     this.databaseDao.init(context);
   }
 
+  /**
+   * 获取所有数据库渠道
+   * @returns 数据库渠道列表
+   */
   async GetDbList(): Promise<DatabaseModel[]> {
     return await this.databaseDao.getDBList();
   }
 
+  /**
+   * 获取数据库渠道
+   * @param dbId 数据库渠道id
+   * @returns 数据库渠道
+   */
+  async GetDb(dbId: string): Promise<DatabaseModel> {
+    return await this.databaseDao.getDB(dbId);
+  }
+
+  /**
+   * 添加数据库渠道
+   * @param db 数据库渠道信息
+   */
   async addDb(db: DatabaseModel) {
     let value = await this.databaseDao.existDb(db.id);
     if (value) {
@@ -37,6 +58,18 @@ class DatabaseService {
     }
   }
 
+  /**
+   * 删除数据库渠道
+   * @param dbId 数据库渠道id
+   */
+  async deleteDb(dbId: string) {
+    await this.databaseDao.deleteDb(dbId);
+  }
+
+  /**
+   * 添加战备
+   * @param stratagem 战备信息
+   */
   async addStratagem(stratagem: StratagemModel) {
     let value = await this.stratagemDao.existStratagem(stratagem.id, stratagem.dbId);
     if (value) {
@@ -45,6 +78,14 @@ class DatabaseService {
     else {
       this.stratagemDao.addStratagem(stratagem);
     }
+  }
+
+  /**
+   * 删除指定数据库渠道的所有战备
+   * @param dbId 数据库渠道id
+   */
+  async deleteStratagems(dbId: string) {
+    await this.stratagemDao.deleteGroupByDBId(dbId);
   }
 }
 

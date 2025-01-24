@@ -161,10 +161,10 @@ export class StratagemDao {
    * 依据数据库渠道id删除战备
    * @param dbId 数据库渠道id
    */
-  deleteGroupByDBId(dbId: string) {
+  async deleteGroupByDBId(dbId: string) {
     let predicates = new relationalStore.RdbPredicates(this.tableName);
     predicates.equalTo('dbId', dbId);
-    this.rdbStore?.delete(predicates);
+    await this.rdbStore?.delete(predicates);
   }
 
   /**

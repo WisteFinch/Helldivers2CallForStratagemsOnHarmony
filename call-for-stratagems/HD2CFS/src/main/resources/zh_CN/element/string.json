@@ -174,7 +174,7 @@
     },
     {
       "name": "db_add_title",
-      "value": "添加数据库渠道"
+      "value": "添加数据库"
     },
     {
       "name": "db_add_hint",
@@ -239,6 +239,54 @@
     {
       "name": "db_updt_err_parse_idx",
       "value": "解析索引时出错：%s"
+    },
+    {
+      "name": "db_updt_err_parse_stratagem",
+      "value": "解析战备时出错：%s"
+    },
+    {
+      "name": "db_updt_err",
+      "value": "更新失败：%s"
+    },
+    {
+      "name": "db_ver_null",
+      "value": "数据库不完整"
+    },
+    {
+      "name": "db_info_id",
+      "value": "ID：%s"
+    },
+    {
+      "name": "root_no_group",
+      "value": "The Galactic War Awaits"
+    },
+    {
+      "name": "play_blank",
+      "value": "PERSONAL HELLPAD\nSYSTEM"
+    },
+    {
+      "name": "db_info_name",
+      "value": "名称：%s"
+    },
+    {
+      "name": "db_info_ver",
+      "value": "版本：%s"
+    },
+    {
+      "name": "db_info_url",
+      "value": "地址：%s"
+    },
+    {
+      "name": "dialog_delete",
+      "value": "删除"
+    },
+    {
+      "name": "db_info_title",
+      "value": "数据库信息"
+    },
+    {
+      "name": "db_updt_latest",
+      "value": "已是最新：%s"
     }
   ]
 }
