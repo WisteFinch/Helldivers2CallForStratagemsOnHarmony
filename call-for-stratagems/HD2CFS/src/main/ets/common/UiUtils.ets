@@ -35,6 +35,7 @@ export class DividerLine {
     Text(str)
       .fontWeight(FontWeight.Bold)
       .fontSize(20)
+      .fontFamily('Sinclair')
   }
   .height("100%")
   .margin({left: 6})

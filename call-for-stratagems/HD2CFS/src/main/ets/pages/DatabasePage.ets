@@ -56,7 +56,7 @@ export struct DatabasePage {
 
   build() {
     NavDestination() {
-      List({ space: 20 }) {
+      List({ space: 10 }) {
         ForEach(this.list, (item: DatabaseModel) => {
           ListItem() {
             Row({ space: 5 }) {
@@ -150,8 +150,8 @@ export struct DatabasePage {
           this.addList = [];
           for (let i = 0; i < this.list.length; i++) {
             this.addList.push(this.list[i].url);
-            this.updateDbDialog.open();
           }
+          this.updateDbDialog.open();
         },
         isEnabled: this.list.length > 0
       },

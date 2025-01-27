@@ -287,6 +287,14 @@
     {
       "name": "db_updt_latest",
       "value": "已是最新：%s"
+    },
+    {
+      "name": "default_string",
+      "value": "NULL"
+    },
+    {
+      "name": "stratagem_empty",
+      "value": "空"
     }
   ]
 }

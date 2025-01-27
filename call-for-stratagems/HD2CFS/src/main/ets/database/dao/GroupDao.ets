@@ -58,8 +58,12 @@ export class GroupDao {
     let predicates = new relationalStore.RdbPredicates(this.tableName);
     predicates.equalTo('id', id);
     let res = await this.rdbStore?.query(predicates, ['name', 'list']);
-    let name = res.getString(res.getColumnIndex('name'));
-    return new GroupModel(id, name, []);
+    if (res.isAtLastRow) {
+      return new GroupModel(-1, 'null', []);
+    } else {
+      let name = res.getString(res.getColumnIndex('name'));
+      return new GroupModel(id, name, []);
+    }
   }
 
   /**

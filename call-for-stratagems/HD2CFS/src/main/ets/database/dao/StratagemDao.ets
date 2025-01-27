@@ -93,11 +93,15 @@ export class StratagemDao {
     predicates.equalTo('id', id);
     predicates.equalTo('dbId', dbId);
     let res = await this.rdbStore?.query(predicates, ['name', 'nameZh', 'icon', 'steps']);
-    let name = res.getString(res.getColumnIndex('name'));
-    let nameZh = res.getString(res.getColumnIndex('nameZh'));
-    let icon = res.getString(res.getColumnIndex('icon'));
-    let steps: number[] = JSON.parse(res.getString(res.getColumnIndex('steps')));
-    return new StratagemModel(id, dbId, name, nameZh, icon, steps);
+    if (res.isAtLastRow) {
+      return new StratagemModel(-1, 'null', 'null', 'null', 'null', []);
+    } else {
+      let name = res.getString(res.getColumnIndex('name'));
+      let nameZh = res.getString(res.getColumnIndex('nameZh'));
+      let icon = res.getString(res.getColumnIndex('icon'));
+      let steps: number[] = JSON.parse(res.getString(res.getColumnIndex('steps')));
+      return new StratagemModel(id, dbId, name, nameZh, icon, steps);
+    }
   }
 
   /**

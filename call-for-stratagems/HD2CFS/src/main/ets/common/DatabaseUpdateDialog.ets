@@ -166,6 +166,7 @@ export struct DatabaseUpdateDialog {
         }
         await DatabaseService.addDb(new DatabaseModel(dbId, dbName, dbNameZh, baseUrl, date));
         this._tasks[this.taskIndex].stage = UpdateStage.Done;
+        this._tasks[this.taskIndex].index = this._tasks[this.taskIndex].count = 1;
         this._tasks[this.taskIndex].txt = dbId;
         this._tasks = [...this._tasks];
       } catch (err) {

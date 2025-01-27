@@ -1,6 +1,7 @@
 import { DatabaseUpdateDialog } from "../common/DatabaseUpdateDialog";
 import { TextInputDialog } from "../common/UiUtils";
 import { DatabasePage } from "./DatabasePage";
+import { ListPage } from "./ListPage";
 import { SettingsPage } from "./SettingsPage";
 
 @Entry
@@ -15,6 +16,9 @@ struct RootPage {
     }
     else if (name === "DatabasePage") {
       DatabasePage()
+    }
+    else if (name === "ListPage") {
+      ListPage()
     }
   }
 
@@ -44,6 +48,7 @@ struct RootPage {
           value: "",
           icon: "resources/base/media/ic_list.svg",
           action: ()=> {
+            this.pageInfos.pushPath({ name: "ListPage"});
           }
         },
         {

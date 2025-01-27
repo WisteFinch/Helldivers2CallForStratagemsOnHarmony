@@ -66,6 +66,10 @@ class DatabaseService {
     await this.databaseDao.deleteDb(dbId);
   }
 
+  async getStratagemList(dbId: string): Promise<StratagemModel[]> {
+    return await this.stratagemDao.getStratagemListByDBId(dbId);
+  }
+
   /**
    * 添加战备
    * @param stratagem 战备信息
