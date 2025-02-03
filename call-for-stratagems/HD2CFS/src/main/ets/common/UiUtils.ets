@@ -22,8 +22,14 @@ export class DividerLine {
 @Builder export function ListItemGroupHead(str: Resource) {
   Text(str)
     .width('100%')
-    .padding({left: 10, bottom: 5})
-    .fontColor($r('app.color.text_hint'))
+    .padding(5)
+    .margin({bottom: 5})
+    .fontWeight(FontWeight.Medium)
+    .fontColor($r('app.color.text_title'))
+    .fontFamily('Sinclair')
+    .backgroundColor($r('app.color.background_primary'))
+    .backgroundImage($r('app.media.stripes'))
+    .backgroundImageSize(ImageSize.Cover)
 }
 
 /**
@@ -35,6 +41,7 @@ export class DividerLine {
     Text(str)
       .fontWeight(FontWeight.Bold)
       .fontSize(20)
+      .fontColor($r('app.color.text_title'))
       .fontFamily('Sinclair')
   }
   .height("100%")

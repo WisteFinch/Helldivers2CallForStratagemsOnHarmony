@@ -6,6 +6,7 @@ import window from '@ohos.window';
 import PreferencesUtil from './common/PreferencesUtil';
 import DatabaseService from './database/DatabaseService';
 import { font } from '@kit.ArkUI';
+import { ConfigurationConstant } from '@kit.AbilityKit';
 
 export default class CFSAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
@@ -27,6 +28,8 @@ export default class CFSAbility extends UIAbility {
         familyName: 'Sinclair',
         familySrc: $rawfile('hc_sinclair_medium.ttf')
       })
+
+      this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_DARK);
     });
   }
 

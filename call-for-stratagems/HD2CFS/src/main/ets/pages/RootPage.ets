@@ -1,5 +1,5 @@
 import { DatabaseUpdateDialog } from "../common/DatabaseUpdateDialog";
-import { TextInputDialog } from "../common/UiUtils";
+import { PageHead, TextInputDialog } from "../common/UiUtils";
 import { DatabasePage } from "./DatabasePage";
 import { ListPage } from "./ListPage";
 import { SettingsPage } from "./SettingsPage";
@@ -30,9 +30,11 @@ struct RootPage {
             Text("Page")
               .width("100%")
               .height(72)
-              .backgroundColor($r('app.color.background_primary'))
-              .borderRadius(24)
+              .backgroundColor($r('app.color.background_secondary'))
+              .borderWidth(2)
+              .borderColor($r('app.color.border'))
               .fontSize(16)
+              .fontColor($r('app.color.text_primary'))
               .fontWeight(500)
               .textAlign(TextAlign.Center)
           }
@@ -40,9 +42,9 @@ struct RootPage {
         .width("100%")
         .height("100%")
         .padding('10')
-        .backgroundColor($r('app.color.background_secondary'))
+        .backgroundColor($r('app.color.background_primary'))
       }
-      .title($r('app.string.HD2CFSAbility_label'))
+      .title(PageHead($r('app.string.HD2CFSAbility_label')))
       .menus([
         {
           value: "",
@@ -59,7 +61,7 @@ struct RootPage {
           }
         }
       ])
-      .backgroundColor($r('app.color.background_secondary'))
+      .backgroundColor($r('app.color.background_primary'))
       .mode(NavigationMode.Stack)
       .navDestination(this.PageMap)
       .titleMode(NavigationTitleMode.Mini)

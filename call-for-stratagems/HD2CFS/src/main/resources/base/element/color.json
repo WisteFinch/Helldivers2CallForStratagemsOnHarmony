@@ -9,24 +9,56 @@
       "value": "#FF000000"
     },
     {
+      "name": "highlight",
+      "value": "#ffe710"
+    },
+    {
+      "name": "stress",
+      "value": "#8d874f"
+    },
+    {
+      "name": "transparent",
+      "value": "#00000000"
+    },
+    {
       "name": "start_window_background",
       "value": "$color:white"
     },
     {
       "name": "background_primary",
-      "value": "$color:white"
+      "value": "#080809"
     },
     {
       "name": "background_secondary",
-      "value": "#F1F3F5"
+      "value": "#222222"
+    },
+    {
+      "name": "background_blur",
+      "value": "#aa1a1a1a"
+    },
+    {
+      "name": "border",
+      "value": "#cbcbcd"
+    },
+    {
+      "name": "border_highlight",
+      "value": "$color:highlight"
     },
     {
       "name": "text_primary",
-      "value": "$color:black"
+      "value": "#dddddd"
     },
     {
       "name": "text_secondary",
-      "value": "#ABAAB2"
+      "value": "#ababaa"
+    },
+    {
+      "name": "text_title",
+      "value": "$color:white"
+    },
+    {
+      "name": "text_highlight",
+      "value": "#ffe710"
     },
     {
       "name": "text_hyperlink",
@@ -50,11 +82,19 @@
     },
     {
       "name": "button_text",
-      "value": "$color:text_hyperlink"
+      "value": "$color:text_primary"
     },
     {
       "name": "button_text_alert",
       "value": "$color:text_alert"
+    },
+    {
+      "name": "scrollbar",
+      "value": "$color:stress"
+    },
+    {
+      "name": "caret",
+      "value": "$color:highlight"
     }
   ]
 }

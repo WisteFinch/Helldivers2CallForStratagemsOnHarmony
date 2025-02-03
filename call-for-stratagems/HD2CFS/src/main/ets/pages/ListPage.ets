@@ -117,19 +117,5 @@ export struct ListPage {
       return true;
     })
     .backgroundColor($r('app.color.background_secondary'))
-    .menus([
-      {
-        value: '',
-        icon: 'resources/base/media/ic_sync.svg',
-        action: () => {
-        }
-      },
-      {
-        value: '',
-        icon: 'resources/base/media/ic_add.svg',
-        action: () => {
-        }
-      }
-    ])
   }
 }
