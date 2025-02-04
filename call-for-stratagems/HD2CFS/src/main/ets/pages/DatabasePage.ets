@@ -1,5 +1,5 @@
 import { DatabaseUpdateDialog } from '../common/DatabaseUpdateDialog';
-import { PageHead, TextInputDialog } from '../common/UiUtils';
+import { AppButton, PageHead, TextInputDialog } from '../common/UiUtils';
 import DatabaseService from '../database/DatabaseService';
 import DatabaseModel from '../database/model/DatabaseModel';
 import { i18n } from '@kit.LocalizationKit';
@@ -11,7 +11,6 @@ export struct DatabasePage {
   @State list: DatabaseModel[] = []
   @State addList: string[] = []
   @State curDb: DatabaseModel = new DatabaseModel('null', 'null', 'null', 'null', 'null')
-
   addDbDialog: CustomDialogController = new CustomDialogController({
     builder: TextInputDialog({
       title: $r('app.string.db_add_title'),
@@ -21,9 +20,9 @@ export struct DatabasePage {
         this.updateDbDialog.open();
       }
     }),
-    alignment: DialogAlignment.Bottom
+    alignment: DialogAlignment.Bottom,
+    customStyle: true
   })
-
   updateDbDialog: CustomDialogController = new CustomDialogController({
     builder: DatabaseUpdateDialog({
       tasks: this.addList,
@@ -33,9 +32,9 @@ export struct DatabasePage {
         })
       }
     }),
-    alignment: DialogAlignment.Bottom
+    alignment: DialogAlignment.Bottom,
+    customStyle: true
   })
-
   infoDialog: CustomDialogController = new CustomDialogController({
     builder: DatabaseInfoDialog({
       db: this.curDb,
@@ -45,7 +44,8 @@ export struct DatabasePage {
         })
       }
     }),
-    alignment: DialogAlignment.Bottom
+    alignment: DialogAlignment.Bottom,
+    customStyle: true
   })
 
   aboutToAppear() {
@@ -73,18 +73,24 @@ export struct DatabasePage {
                 // 数据库名称
                 if (i18n.System.getSystemLanguage() == 'zh-Hans') {
                   Text(item.nameZh)
+                    .fontColor($r('app.color.text_primary'))
                     .fontWeight(FontWeight.Medium)
+                    .fontFamily('Sinclair')
                 } else {
                   Text(item.name)
+                    .fontColor($r('app.color.text_primary'))
                     .fontWeight(FontWeight.Medium)
+                    .fontFamily('Sinclair')
                 }
                 // 数据库版本
                 if (item.ver == 'null') {
                   Text($r('app.string.db_ver_null'))
                     .fontColor($r('app.color.text_alert'))
+                    .fontFamily('Sinclair')
                 } else {
                   Text(item.ver)
-                    .fontColor($r('app.color.text_hint'))
+                    .fontColor($r('app.color.text_secondary'))
+                    .fontFamily('Sinclair')
                 }
               }
               .alignItems(HorizontalAlign.Start)
@@ -93,42 +99,39 @@ export struct DatabasePage {
               Blank()
 
               // 更新
-              Button() {
+              AppButton({
+                click: () => {
+                  this.addList = [item.url];
+                  this.updateDbDialog.open();
+                }
+              }) {
                 Image($r('app.media.ic_sync'))
                   .width(30)
                   .height(30)
                   .fillColor($r('app.color.button_text'))
               }
-              .width(40)
-              .height(40)
-              .backgroundColor($r('app.color.button_background'))
-              .onClick(() => {
-                this.addList = [item.url];
-                this.updateDbDialog.open();
-              })
 
               // 详细信息
-              Button() {
+              AppButton({
+                click: () => {
+                  this.curDb = item;
+                  this.infoDialog.open();
+                }
+              }) {
                 Image($r('app.media.ic_more'))
                   .width(30)
                   .height(30)
                   .fillColor($r('app.color.button_text'))
-                  .onClick(() => {
-                    this.curDb = item;
-                    this.infoDialog.open();
-                  })
               }
-              .width(40)
-              .height(40)
-              .backgroundColor($r('app.color.button_background'))
             }
             .width('100%')
             .alignItems(VerticalAlign.Center)
           }
           .width('100%')
-          .borderRadius(24)
+          .backgroundColor($r('app.color.background_secondary'))
+          .borderWidth(2)
+          .borderColor($r('app.color.border'))
           .padding(10)
-          .backgroundColor($r('app.color.background_primary'))
         })
       }
       .width('100%')
@@ -151,7 +154,7 @@ export struct DatabasePage {
       {
         value: '',
         icon: 'resources/base/media/ic_sync.svg',
-        action: ()=> {
+        action: () => {
           this.addList = [];
           for (let i = 0; i < this.list.length; i++) {
             this.addList.push(this.list[i].url);
@@ -163,7 +166,7 @@ export struct DatabasePage {
       {
         value: '',
         icon: 'resources/base/media/ic_add.svg',
-        action: ()=> {
+        action: () => {
           this.addDbDialog.open();
         }
       }

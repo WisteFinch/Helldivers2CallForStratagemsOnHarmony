@@ -1,4 +1,4 @@
-import { alignBottom, alignCenter, alignTop, alignTopLeft, alignTopRight, PageHead } from '../common/UiUtils';
+import { AlignBottom, AlignCenter, AlignTop, alignTopLeft, alignTopRight, PageHead } from '../common/UiUtils';
 import DatabaseService from '../database/DatabaseService';
 import DatabaseModel from '../database/model/DatabaseModel';
 import { i18n } from '@kit.LocalizationKit';
@@ -18,20 +18,20 @@ function StratagemItem(s: StratagemModel) {
       Image(fileUri.getUriFromPath(getContext().filesDir + `/${s.dbId}/${s.icon}.svg`))
         .margin(5)
         .padding(5)
-        .alignRules(alignCenter)
-        .backgroundColor($r('app.color.background_secondary'))
+        .alignRules(AlignCenter)
+        .backgroundColor($r('app.color.background_tertiary'))
       Text()
-        .borderWidth({top:2, left: 2, right: 2})
+        .borderWidth({ top: 2, left: 2, right: 2 })
         .width('100%')
         .height('40%')
         .borderColor($r('app.color.border'))
-        .alignRules(alignTop)
+        .alignRules(AlignTop)
       Text()
-        .borderWidth({bottom:2, left: 2, right: 2})
+        .borderWidth({ bottom: 2, left: 2, right: 2 })
         .width('100%')
         .height('40%')
         .borderColor($r('app.color.border'))
-        .alignRules(alignBottom)
+        .alignRules(AlignBottom)
     }
     .width('100%')
     .height('100%')
@@ -63,8 +63,8 @@ export struct ListPage {
         .textAlign(TextAlign.Start)
         .width('100%')
         .height(30)
-        .padding({left:10, right: 10})
-        .alignRules(alignTop)
+        .padding({ left: 10, right: 10 })
+        .alignRules(AlignTop)
         .id('tabTxt')
       Text((index + 1).toString())
         .fontColor(this.selectedIndex === index ? $r("app.color.text_stress") : $r('app.color.text_primary'))
@@ -74,37 +74,37 @@ export struct ListPage {
         .width('fir_content')
         .height(20)
         .alignRules(alignTopRight)
-        .offset({top: 27, right: 35})
+        .offset({ top: 27, right: 35 })
       Text()
         .width(this.tabBarWidth - 50)
         .height(this.selectedIndex === index ? 45 : 35)
-        .outlineWidth({left:2, bottom: 2})
+        .outlineWidth({ left: 2, bottom: 2 })
         .outlineColor(this.selectedIndex === index ? $r('app.color.border_highlight') : $r('app.color.border'))
         .alignRules(alignTopLeft)
       Text()
         .width(30)
         .height(this.selectedIndex === index ? 45 : 35)
-        .outlineWidth({right:2, bottom: 2})
+        .outlineWidth({ right: 2, bottom: 2 })
         .outlineColor(this.selectedIndex === index ? $r('app.color.border_highlight') : $r('app.color.border'))
         .alignRules(alignTopRight)
       if (this.selectedIndex === index) {
         Image($r('app.media.slash'))
           .width(this.tabBarWidth - 50)
           .height(10)
-          .padding({left: 5})
+          .padding({ left: 5 })
           .alignRules(alignTopLeft)
-          .offset({top: 30})
+          .offset({ top: 30 })
         Image($r('app.media.slash'))
           .width(30)
           .height(10)
-          .padding({right: 5})
+          .padding({ right: 5 })
           .alignRules(alignTopRight)
-          .offset({top: 30})
+          .offset({ top: 30 })
       }
     }
     .width(this.tabBarWidth)
     .height(50)
-    .margin({left:5, right: 5})
+    .margin({ left: 5, right: 5 })
   }
 
   async aboutToAppear() {
@@ -131,10 +131,8 @@ export struct ListPage {
                   StratagemItem(sItem)
                 })
               } else { // 无战备，显示空
-                ListItem()
-                {
-                  Column()
-                  {
+                ListItem() {
+                  Column() {
                     Image($r('app.media.ic_super_earth'))
                       .fillColor($r('app.color.text_secondary'))
                     Text($r('app.string.stratagem_empty'))

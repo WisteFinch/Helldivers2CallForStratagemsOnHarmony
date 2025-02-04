@@ -24,7 +24,7 @@ import {
   PREFERENCES_TYPE_OPEN_DSP
 } from '../common/Constants';
 import PreferencesUtil from '../common/PreferencesUtil';
-import { ListItemGroupHead, PageHead } from '../common/UiUtils';
+import { AlignCenter, AppButton, ListItemGroupHead, PageHead } from '../common/UiUtils';
 
 /**
  * 下拉菜单
@@ -81,7 +81,6 @@ export struct SettingsPage {
                     text: PreferencesUtil.getVal(PREFERENCES_SERVER_ADDR, '127.0.0.1').toString()
                   })
                     .caretColor($r('app.color.caret'))
-                    .caretColor($r('app.color.caret'))
                     .backgroundColor($r('app.color.background_secondary'))
                     .borderRadius(0)
                     .fontFamily('Sinclair')
@@ -136,7 +135,7 @@ export struct SettingsPage {
               ListItem() {
                 Row({ space: 5 }) {
                   // 扫码
-                  Button({ type: ButtonType.Normal, stateEffect: true }) {
+                  AppButton({ weight: 1 }) {
                     Column({ space: 6 }) {
                       Image($r('app.media.ic_scan'))
                         .width(40)
@@ -146,16 +145,12 @@ export struct SettingsPage {
                         .fontWeight(FontWeight.Medium)
                         .fontFamily('Sinclair')
                     }
+                    .width('100%')
                     .alignItems(HorizontalAlign.Center)
                   }
-                  .height('100%')
-                  .backgroundColor($r('app.color.button_background'))
-                  .borderColor($r('app.color.border'))
-                  .borderWidth(2)
-                  .layoutWeight(1)
 
                   // 测试连接
-                  Button({ type: ButtonType.Normal, stateEffect: true }) {
+                  AppButton({ weight: 1 }) {
                     Column({ space: 6 }) {
                       Image($r('app.media.ic_sync'))
                         .width(40)
@@ -165,13 +160,9 @@ export struct SettingsPage {
                         .fontWeight(FontWeight.Medium)
                         .fontFamily('Sinclair')
                     }
+                    .width('100%')
                     .alignItems(HorizontalAlign.Center)
                   }
-                  .height('100%')
-                  .backgroundColor($r('app.color.button_background'))
-                  .borderColor($r('app.color.border'))
-                  .borderWidth(2)
-                  .layoutWeight(1)
                 }
                 .alignItems(VerticalAlign.Center)
               }
@@ -329,24 +320,14 @@ export struct SettingsPage {
 
               // 同步配置
               ListItem() {
-                Button({ type: ButtonType.Normal, stateEffect: true }) {
-                  Row({ space: 6 }) {
-                    Text($r('app.string.set_sync_apply'))
-                      .fontWeight(FontWeight.Medium)
-                      .fontColor($r('app.color.button_text'))
-                      .fontFamily('Sinclair')
-                  }
-                  .width('100%')
-                  .height('100%')
-                  .alignItems(VerticalAlign.Center)
+                AppButton() {
+                  Text($r('app.string.set_sync_apply'))
+                    .fontColor($r('app.color.button_text'))
+                    .fontWeight(FontWeight.Medium)
+                    .fontFamily('Sinclair')
+                    .width('100%')
+                    .height(35)
                 }
-                .align(Alignment.Start)
-                .width('100%')
-                .height(50)
-                .borderColor($r('app.color.border'))
-                .borderWidth(2)
-                .padding(5)
-                .backgroundColor($r('app.color.background_primary'))
               }
             }
             .width('100%')
@@ -369,7 +350,6 @@ export struct SettingsPage {
                       .fontWeight(FontWeight.Medium)
                       .fontFamily('Sinclair')
                     Text($r('app.string.set_ctrl_simplified_mode_desc'))
-                      .fontColor($r('app.color.text_primary'))
                       .fontColor($r('app.color.text_secondary'))
                       .fontFamily('Sinclair')
                   }
@@ -420,7 +400,11 @@ export struct SettingsPage {
             List({ space: 5 }) {
               // 数据库
               ListItem() {
-                Button({ type: ButtonType.Normal, stateEffect: true }) {
+                AppButton({
+                  click: () => {
+                    this.pageInfos.pushPath({ name: 'DatabasePage' });
+                  }
+                }) {
                   Row() {
                     Column() {
                       Text($r('app.string.set_info_db'))
@@ -441,21 +425,11 @@ export struct SettingsPage {
                   .width('100%')
                   .alignItems(VerticalAlign.Center)
                 }
-                .align(Alignment.Start)
-                .width('100%')
-                .height(50)
-                .borderColor($r('app.color.border'))
-                .borderWidth(2)
-                .padding(5)
-                .backgroundColor($r('app.color.background_primary'))
-                .onClick(() => {
-                  this.pageInfos.pushPath({ name: 'DatabasePage' });
-                })
               }
 
               // 软件
               ListItem() {
-                Button({ type: ButtonType.Normal, stateEffect: true }) {
+                AppButton() {
                   Row() {
                     Column() {
                       Text($r('app.string.set_info_app'))
@@ -476,30 +450,18 @@ export struct SettingsPage {
                   .width('100%')
                   .alignItems(VerticalAlign.Center)
                 }
-                .align(Alignment.Start)
-                .width('100%')
-                .height(50)
-                .borderColor($r('app.color.border'))
-                .borderWidth(2)
-                .padding(5)
-                .backgroundColor($r('app.color.background_primary'))
               }
 
               // 关于
               ListItem() {
-                Button({ type: ButtonType.Normal, stateEffect: true }) {
+                AppButton() {
                   Text($r('app.string.set_info_about'))
                     .fontColor($r('app.color.button_text'))
                     .fontWeight(FontWeight.Medium)
                     .fontFamily('Sinclair')
+                    .width('100%')
+                    .height(35)
                 }
-                .align(Alignment.Start)
-                .width('100%')
-                .height(50)
-                .borderColor($r('app.color.border'))
-                .borderWidth(2)
-                .padding(5)
-                .backgroundColor($r('app.color.background_primary'))
               }
             }
             .width('100%')
@@ -511,7 +473,12 @@ export struct SettingsPage {
       }
       .width('100%')
       .height('100%')
-      .padding({top: 10, left: 10, bottom: 10, right: 15})
+      .padding({
+        top: 10,
+        left: 10,
+        bottom: 10,
+        right: 15
+      })
       .backgroundColor($r('app.color.transparent'))
       .scrollBarColor('#8d874f')
     }

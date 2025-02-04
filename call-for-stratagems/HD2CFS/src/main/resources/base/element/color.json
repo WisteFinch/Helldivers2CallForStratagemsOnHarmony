@@ -33,12 +33,16 @@
       "value": "#cc222222"
     },
     {
+      "name": "background_tertiary",
+      "value": "#cc353535"
+    },
+    {
       "name": "background_blur",
       "value": "#bb1a1a1a"
     },
     {
       "name": "border",
-      "value": "#cbcbcd"
+      "value": "#676767"
     },
     {
       "name": "border_highlight",
@@ -70,7 +74,7 @@
     },
     {
       "name": "text_alert",
-      "value": "#EE0000"
+      "value": "$color:highlight"
     },
     {
       "name": "divider",
@@ -86,7 +90,7 @@
     },
     {
       "name": "button_text_alert",
-      "value": "$color:text_alert"
+      "value": "$color:highlight"
     },
     {
       "name": "scrollbar",

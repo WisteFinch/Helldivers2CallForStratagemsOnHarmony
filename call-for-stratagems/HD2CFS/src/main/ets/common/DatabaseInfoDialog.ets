@@ -1,7 +1,7 @@
 import DatabaseService from '../database/DatabaseService'
 import DatabaseModel from '../database/model/DatabaseModel'
 import { i18n } from '@kit.LocalizationKit'
-import { DividerLine } from './UiUtils'
+import { AppButton, DividerLine } from './UiUtils'
 import fs from '@ohos.file.fs'
 
 /**
@@ -10,18 +10,15 @@ import fs from '@ohos.file.fs'
 @CustomDialog
 export struct DatabaseInfoDialog {
   controller: CustomDialogController
-
   /**
    * 删除数据库回调
    */
   onDelete: () => void = () => {
   }
-
   /**
    * 数据库信息
    */
   @Link db: DatabaseModel
-
   /**
    * 分割线
    */
@@ -34,7 +31,8 @@ export struct DatabaseInfoDialog {
     // 删除文件
     try {
       await fs.rmdir(getContext().filesDir + `/${this.db.id}/`);
-    } catch (_err) {}
+    } catch (_err) {
+    }
     this.onDelete();
   }
 
@@ -44,22 +42,35 @@ export struct DatabaseInfoDialog {
       Text($r('app.string.db_info_title'))
         .fontSize(20)
         .fontWeight(FontWeight.Medium)
+        .fontColor($r('app.color.text_stress'))
+        .fontFamily('Sinclair')
 
       // 详细信息
       Column({ space: 5 }) {
         Text($r('app.string.db_info_id', this.db.id))
+          .fontColor($r('app.color.text_primary'))
+          .fontFamily('Sinclair')
         if (i18n.System.getSystemLanguage() == 'zh-Hans') {
           Text($r('app.string.db_info_name', this.db.nameZh))
+            .fontColor($r('app.color.text_primary'))
+            .fontFamily('Sinclair')
         } else {
           Text($r('app.string.db_info_name', this.db.name))
+            .fontColor($r('app.color.text_primary'))
+            .fontFamily('Sinclair')
         }
         if (this.db.ver == 'null') {
           Text($r('app.string.db_ver_null'))
             .fontColor($r('app.color.text_alert'))
+            .fontFamily('Sinclair')
         } else {
           Text($r('app.string.db_info_ver', this.db.ver))
+            .fontColor($r('app.color.text_primary'))
+            .fontFamily('Sinclair')
         }
         Text($r('app.string.db_info_url', this.db.url))
+          .fontColor($r('app.color.text_primary'))
+          .fontFamily('Sinclair')
       }
       .width('100%')
       .alignItems(HorizontalAlign.Start)
@@ -67,30 +78,36 @@ export struct DatabaseInfoDialog {
       // 按钮
       Row({ space: 20 }) {
         // 删除
-        Button($r('app.string.dialog_delete'))
-          .onClick(() => {
+        AppButton({
+          weight: 1, click: () => {
             this.deleteDb();
             this.controller.close();
-          })
-          .fontColor($r('app.color.button_text_alert'))
-          .backgroundColor($r('app.color.button_background'))
-          .layoutWeight(1)
-
-        Divider()
-          .vertical(true)
-          .height(22)
+          }
+        }) {
+          Text($r('app.string.dialog_delete'))
+            .width('100%')
+            .fontColor($r('app.color.button_text_alert'))
+            .fontFamily('Sinclair')
+            .textAlign(TextAlign.Center)
+        }
 
         // 确认
-        Button($r('app.string.dialog_accept'))
-          .onClick(() => {
+        AppButton({
+          weight: 1, click: () => {
             this.controller.close();
-          })
-          .fontColor($r('app.color.button_text'))
-          .backgroundColor($r('app.color.button_background'))
-          .layoutWeight(1)
+          }
+        }) {
+          Text($r('app.string.dialog_accept'))
+            .width('100%')
+            .fontColor($r('app.color.button_text'))
+            .fontFamily('Sinclair')
+            .textAlign(TextAlign.Center)
+        }
       }
       .height(40)
     }
+    .margin(20)
     .padding(20)
+    .backgroundColor($r('app.color.background_tertiary'))
   }
 }
