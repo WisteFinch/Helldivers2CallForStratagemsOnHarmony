@@ -134,14 +134,19 @@ export struct DatabasePage {
       .width('100%')
       .height('100%')
       .padding('16')
-      .backgroundColor($r('app.color.background_secondary'))
+      .backgroundColor($r('app.color.transparent'))
+      .scrollBarColor('#8d874f')
     }
     .title(PageHead($r('app.string.db_page_title')))
     .onBackPressed(() => {
       this.pageInfos.pop();
       return true;
     })
-    .backgroundColor($r('app.color.background_secondary'))
+    .backgroundImage($r('app.media.bg_2'))
+    .backgroundImageSize(ImageSize.Cover)
+    .backgroundImagePosition(Alignment.Center)
+    .backgroundEffect({ radius: 2, color: $r('app.color.background_blur') })
+    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
     .menus([
       {
         value: '',

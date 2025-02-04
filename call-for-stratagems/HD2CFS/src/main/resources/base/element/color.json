@@ -26,15 +26,15 @@
     },
     {
       "name": "background_primary",
-      "value": "#080809"
+      "value": "#cc080808"
     },
     {
       "name": "background_secondary",
-      "value": "#222222"
+      "value": "#cc222222"
     },
     {
       "name": "background_blur",
-      "value": "#aa1a1a1a"
+      "value": "#bb1a1a1a"
     },
     {
       "name": "border",
@@ -53,7 +53,7 @@
       "value": "#ababaa"
     },
     {
-      "name": "text_title",
+      "name": "text_stress",
       "value": "$color:white"
     },
     {
@@ -66,7 +66,7 @@
     },
     {
       "name": "text_hint",
-      "value": "#606162"
+      "value": "#676767"
     },
     {
       "name": "text_alert",

@@ -39,7 +39,7 @@ function SettingSelect(opts: SelectOption[], key: string, defaultVal: number, ds
   Select(opts)
     .font({ family: 'Sinclair' })
     .optionFont({ family: 'Sinclair' })
-    .selectedOptionFontColor($r('app.color.text_title'))
+    .selectedOptionFontColor($r("app.color.text_stress"))
     .selectedOptionFont({ weight: FontWeight.Bold, family: 'Sinclair' })
     .menuBackgroundColor($r('app.color.background_secondary'))
     .selectedOptionBgColor($r('app.color.stress'))
@@ -236,7 +236,7 @@ export struct SettingsPage {
                       PreferencesUtil.putVal(PREFERENCES_DELAY, Number(value));
                     })
                   Text($r('app.string.set_unit_ms'))
-                    .fontColor($r('app.color.text_hint'))
+                    .fontColor($r('app.color.text_secondary'))
                     .fontFamily('Sinclair')
                 }
               }
@@ -370,7 +370,7 @@ export struct SettingsPage {
                       .fontFamily('Sinclair')
                     Text($r('app.string.set_ctrl_simplified_mode_desc'))
                       .fontColor($r('app.color.text_primary'))
-                      .fontColor($r('app.color.text_hint'))
+                      .fontColor($r('app.color.text_secondary'))
                       .fontFamily('Sinclair')
                   }
                   .alignItems(HorizontalAlign.Start)
@@ -381,6 +381,7 @@ export struct SettingsPage {
                     type: ToggleType.Switch,
                     isOn: Boolean(PreferencesUtil.getVal(PREFERENCES_SIMPLIFIED_MODE, false))
                   })
+                    .selectedColor($r('app.color.stress'))
                     .onChange((isOn: boolean) => {
                       PreferencesUtil.putVal(PREFERENCES_SIMPLIFIED_MODE, isOn);
                     })
@@ -427,14 +428,14 @@ export struct SettingsPage {
                         .fontWeight(FontWeight.Medium)
                         .fontFamily('Sinclair')
                       Text('[hd2_db] 2024-12-26T14:02:42Z')
-                        .fontColor($r('app.color.text_hint'))
+                        .fontColor($r('app.color.text_secondary'))
                         .fontFamily('Sinclair')
                     }
                     .alignItems(HorizontalAlign.Start)
 
                     Blank()
                     Text($r('app.string.set_info_latest'))
-                      .fontColor($r('app.color.text_hint'))
+                      .fontColor($r('app.color.text_secondary'))
                       .fontFamily('Sinclair')
                   }
                   .width('100%')
@@ -462,14 +463,14 @@ export struct SettingsPage {
                         .fontWeight(FontWeight.Medium)
                         .fontFamily('Sinclair')
                       Text('v1.0.0')
-                        .fontColor($r('app.color.text_hint'))
+                        .fontColor($r('app.color.text_secondary'))
                         .fontFamily('Sinclair')
                     }
                     .alignItems(HorizontalAlign.Start)
 
                     Blank()
                     Text($r('app.string.set_info_latest'))
-                      .fontColor($r('app.color.text_hint'))
+                      .fontColor($r('app.color.text_secondary'))
                       .fontFamily('Sinclair')
                   }
                   .width('100%')
@@ -510,7 +511,7 @@ export struct SettingsPage {
       }
       .width('100%')
       .height('100%')
-      .padding('10')
+      .padding({top: 10, left: 10, bottom: 10, right: 15})
       .backgroundColor($r('app.color.transparent'))
       .scrollBarColor('#8d874f')
     }
@@ -519,8 +520,10 @@ export struct SettingsPage {
       this.pageInfos.pop();
       return true;
     })
-    .backgroundImage($r('app.media.bg'))
+    .backgroundImage($r('app.media.bg_2'))
     .backgroundImageSize(ImageSize.Cover)
+    .backgroundImagePosition(Alignment.Center)
     .backgroundEffect({ radius: 2, color: $r('app.color.background_blur') })
+    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
   }
 }

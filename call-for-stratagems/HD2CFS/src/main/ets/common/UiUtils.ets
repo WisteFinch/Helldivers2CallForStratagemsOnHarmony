@@ -25,7 +25,7 @@ export class DividerLine {
     .padding(5)
     .margin({bottom: 5})
     .fontWeight(FontWeight.Medium)
-    .fontColor($r('app.color.text_title'))
+    .fontColor($r("app.color.text_stress"))
     .fontFamily('Sinclair')
     .backgroundColor($r('app.color.background_primary'))
     .backgroundImage($r('app.media.stripes'))
@@ -40,8 +40,8 @@ export class DividerLine {
   Row() {
     Text(str)
       .fontWeight(FontWeight.Bold)
-      .fontSize(20)
-      .fontColor($r('app.color.text_title'))
+      .fontSize(24)
+      .fontColor($r("app.color.text_stress"))
       .fontFamily('Sinclair')
   }
   .height("100%")
@@ -122,4 +122,44 @@ export struct TextInputDialog {
     }
     .padding(20)
   }
+}
+
+/**
+ * 顶部对齐
+ */
+export const alignTop : Record<string, Record<string, string | VerticalAlign | HorizontalAlign>> = {
+  'top': { 'anchor': '__container__', 'align': VerticalAlign.Top }
+}
+
+/**
+ * 底部对齐
+ */
+export const alignBottom : Record<string, Record<string, string | VerticalAlign | HorizontalAlign>> = {
+  'bottom': { 'anchor': '__container__', 'align': VerticalAlign.Bottom }
+}
+
+/**
+ * 居中对齐
+ */
+export const alignCenter : Record<string, Record<string, string | VerticalAlign | HorizontalAlign>> = {
+  'top': { 'anchor': '__container__', 'align': VerticalAlign.Top },
+  'bottom': { 'anchor': '__container__', 'align': VerticalAlign.Bottom },
+  'left': { 'anchor': '__container__', 'align': HorizontalAlign.Start },
+  'right': { 'anchor': '__container__', 'align': HorizontalAlign.End }
+}
+
+/**
+ * 左上对齐
+ */
+export const alignTopLeft : Record<string, Record<string, string | VerticalAlign | HorizontalAlign>> = {
+  'top': { 'anchor': '__container__', 'align': VerticalAlign.Top },
+  'left': { 'anchor': '__container__', 'align': HorizontalAlign.Start }
+}
+
+/**
+ * 右上对齐
+ */
+export const alignTopRight : Record<string, Record<string, string | VerticalAlign | HorizontalAlign>> = {
+  'top': { 'anchor': '__container__', 'align': VerticalAlign.Top },
+  'right': { 'anchor': '__container__', 'align': HorizontalAlign.End }
 }

@@ -23,51 +23,54 @@ struct RootPage {
   }
 
   build() {
-    Column() {
-      Navigation(this.pageInfos) {
-        List({ space: 12 }) {
-          ListItem() {
-            Text("Page")
-              .width("100%")
-              .height(72)
-              .backgroundColor($r('app.color.background_secondary'))
-              .borderWidth(2)
-              .borderColor($r('app.color.border'))
-              .fontSize(16)
-              .fontColor($r('app.color.text_primary'))
-              .fontWeight(500)
-              .textAlign(TextAlign.Center)
-          }
+    Navigation(this.pageInfos) {
+      List({ space: 12 }) {
+        ListItem() {
+          Text("Page")
+            .width("100%")
+            .height(72)
+            .backgroundColor($r('app.color.background_secondary'))
+            .borderWidth(2)
+            .borderColor($r('app.color.border'))
+            .fontSize(16)
+            .fontColor($r('app.color.text_primary'))
+            .fontWeight(500)
+            .textAlign(TextAlign.Center)
         }
-        .width("100%")
-        .height("100%")
-        .padding('10')
-        .backgroundColor($r('app.color.background_primary'))
       }
-      .title(PageHead($r('app.string.HD2CFSAbility_label')))
-      .menus([
-        {
-          value: "",
-          icon: "resources/base/media/ic_list.svg",
-          action: ()=> {
-            this.pageInfos.pushPath({ name: "ListPage"});
-          }
-        },
-        {
-          value: "",
-          icon: 'resources/base/media/ic_settings.svg',
-          action: ()=> {
-            this.pageInfos.pushPath({ name: "SettingsPage"});
-          }
-        }
-      ])
-      .backgroundColor($r('app.color.background_primary'))
-      .mode(NavigationMode.Stack)
-      .navDestination(this.PageMap)
-      .titleMode(NavigationTitleMode.Mini)
-      .hideBackButton(true)
+      .width("100%")
+      .height("100%")
+      .padding('10')
+      .backgroundColor($r('app.color.transparent'))
     }
-    .height('100%')
+    .title(PageHead($r('app.string.HD2CFSAbility_label')))
+    .menus([
+      {
+        value: "",
+        icon: "resources/base/media/ic_list.svg",
+        action: ()=> {
+          this.pageInfos.pushPath({ name: "ListPage"});
+        }
+      },
+      {
+        value: "",
+        icon: 'resources/base/media/ic_settings.svg',
+        action: ()=> {
+          this.pageInfos.pushPath({ name: "SettingsPage"});
+        }
+      }
+    ])
+    .backgroundColor($r('app.color.background_primary'))
+    .backgroundImage($r('app.media.bg_1'))
+    .backgroundImageSize(ImageSize.Cover)
+    .backgroundImagePosition(Alignment.Center)
+    .backgroundEffect({ radius: 2, color: $r('app.color.background_blur') })
+    .mode(NavigationMode.Stack)
+    .navDestination(this.PageMap)
+    .titleMode(NavigationTitleMode.Mini)
+    .hideBackButton(true)
     .width('100%')
+    .height('100%')
+    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
   }
 }

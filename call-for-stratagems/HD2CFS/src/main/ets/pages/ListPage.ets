@@ -1,9 +1,10 @@
-import { PageHead } from '../common/UiUtils';
+import { alignBottom, alignCenter, alignTop, alignTopLeft, alignTopRight, PageHead } from '../common/UiUtils';
 import DatabaseService from '../database/DatabaseService';
 import DatabaseModel from '../database/model/DatabaseModel';
 import { i18n } from '@kit.LocalizationKit';
 import StratagemModel from '../database/model/StratagemModel';
 import { fileUri } from '@kit.CoreFileKit';
+import { display } from '@kit.ArkUI';
 
 /**
  * 战备项目
@@ -11,19 +12,32 @@ import { fileUri } from '@kit.CoreFileKit';
  * @param name 名称资源
  */
 @Builder
-function StratagemItem(img: ResourceStr, name: ResourceStr) {
+function StratagemItem(s: StratagemModel) {
   ListItem() {
-    Column() {
-      Image(img)
-        .height(70)
-        .width(70)
-      Text(name)
-        .fontFamily('Sinclair')
-        .textAlign(TextAlign.Center)
+    RelativeContainer() {
+      Image(fileUri.getUriFromPath(getContext().filesDir + `/${s.dbId}/${s.icon}.svg`))
+        .margin(5)
+        .padding(5)
+        .alignRules(alignCenter)
+        .backgroundColor($r('app.color.background_secondary'))
+      Text()
+        .borderWidth({top:2, left: 2, right: 2})
+        .width('100%')
+        .height('40%')
+        .borderColor($r('app.color.border'))
+        .alignRules(alignTop)
+      Text()
+        .borderWidth({bottom:2, left: 2, right: 2})
+        .width('100%')
+        .height('40%')
+        .borderColor($r('app.color.border'))
+        .alignRules(alignBottom)
     }
+    .width('100%')
+    .height('100%')
   }
-  .width('100')
-  .backgroundColor('#555555')
+  .width('85')
+  .height('85')
 }
 
 @Component
@@ -34,25 +48,63 @@ export struct ListPage {
   @State currentIndex: number = 0
   @State selectedIndex: number = 0
   private controller: TabsController = new TabsController()
-  @State tabBarWidth: Length = '100%'
-  @State Lanes: LengthConstrain = { minLength: 100, maxLength: 100 }
+  @State tabBarWidth: number = 100
+  @State Lanes: LengthConstrain = { minLength: 90, maxLength: 90 }
 
   @Builder
   tabBuilder(index: number, name: string) {
-    Column() {
+    RelativeContainer() {
       Text(name)
-        .fontColor(this.selectedIndex === index ? $r('app.color.text_hyperlink') : $r('app.color.text_primary'))
+        .fontColor(this.selectedIndex === index ? $r("app.color.text_stress") : $r('app.color.text_primary'))
         .fontWeight(this.selectedIndex === index ? FontWeight.Medium : FontWeight.Normal)
-        .margin({ top: 10, bottom: 10 })
+        .fontFamily('Sinclair')
         .textOverflow({ overflow: this.selectedIndex === index ? TextOverflow.MARQUEE : TextOverflow.Ellipsis })
         .maxLines(1)
+        .textAlign(TextAlign.Start)
+        .width('100%')
+        .height(30)
+        .padding({left:10, right: 10})
+        .alignRules(alignTop)
+        .id('tabTxt')
+      Text((index + 1).toString())
+        .fontColor(this.selectedIndex === index ? $r("app.color.text_stress") : $r('app.color.text_primary'))
+        .fontWeight(this.selectedIndex === index ? FontWeight.Medium : FontWeight.Normal)
+        .fontFamily('Sinclair')
         .textAlign(TextAlign.Center)
-      Divider()
-        .strokeWidth(2)
-        .color($r('app.color.text_hyperlink'))
-        .opacity(this.selectedIndex === index ? 1 : 0)
+        .width('fir_content')
+        .height(20)
+        .alignRules(alignTopRight)
+        .offset({top: 27, right: 35})
+      Text()
+        .width(this.tabBarWidth - 50)
+        .height(this.selectedIndex === index ? 45 : 35)
+        .outlineWidth({left:2, bottom: 2})
+        .outlineColor(this.selectedIndex === index ? $r('app.color.border_highlight') : $r('app.color.border'))
+        .alignRules(alignTopLeft)
+      Text()
+        .width(30)
+        .height(this.selectedIndex === index ? 45 : 35)
+        .outlineWidth({right:2, bottom: 2})
+        .outlineColor(this.selectedIndex === index ? $r('app.color.border_highlight') : $r('app.color.border'))
+        .alignRules(alignTopRight)
+      if (this.selectedIndex === index) {
+        Image($r('app.media.slash'))
+          .width(this.tabBarWidth - 50)
+          .height(10)
+          .padding({left: 5})
+          .alignRules(alignTopLeft)
+          .offset({top: 30})
+        Image($r('app.media.slash'))
+          .width(30)
+          .height(10)
+          .padding({right: 5})
+          .alignRules(alignTopRight)
+          .offset({top: 30})
+      }
     }
     .width(this.tabBarWidth)
+    .height(50)
+    .margin({left:5, right: 5})
   }
 
   async aboutToAppear() {
@@ -64,7 +116,8 @@ export struct ListPage {
         this.stratagemList.push([]);
       }
     }
-    this.tabBarWidth = this.dbList.length > 1 ? '62%' : '100%';
+    let dsp = display.getDefaultDisplaySync();
+    this.tabBarWidth = px2vp(this.dbList.length > 1 ? dsp.width * 0.62 : dsp.width);
   }
 
   build() {
@@ -74,17 +127,30 @@ export struct ListPage {
           TabContent() {
             List({ space: 5 }) {
               if (this.stratagemList[dbIndex].length != 0) {
-                ForEach(this.stratagemList[dbIndex], (sItem: StratagemModel, sIndex: number) => {
-                  StratagemItem(fileUri.getUriFromPath(getContext().filesDir + `/${dbItem.id}/${sItem.icon}.svg`),
-                    sItem.name)
+                ForEach(this.stratagemList[dbIndex], (sItem: StratagemModel) => {
+                  StratagemItem(sItem)
                 })
               } else { // 无战备，显示空
-                StratagemItem($r('app.media.ic_question'), $r('app.string.stratagem_empty'))
+                ListItem()
+                {
+                  Column()
+                  {
+                    Image($r('app.media.ic_super_earth'))
+                      .fillColor($r('app.color.text_secondary'))
+                    Text($r('app.string.stratagem_empty'))
+                      .fontColor($r('app.color.text_secondary'))
+                      .fontWeight(FontWeight.Medium)
+                      .fontFamily('Sinclair')
+                  }
+                  .width('60%')
+                  .alignItems(HorizontalAlign.Center)
+                }
               }
             }
             .width('100%')
             .height('100%')
-            .lanes(this.Lanes)
+            .lanes(this.stratagemList[dbIndex].length == 0 ? 1 : this.Lanes)
+            .scrollBarColor('#8d874f')
             .alignListItem(ListItemAlign.Center)
           }
           .tabBar(this.tabBuilder(dbIndex, i18n.System.getSystemLanguage() == 'zh-Hans' ? dbItem.nameZh : dbItem.name))
@@ -109,13 +175,17 @@ export struct ListPage {
       })
       .width('100%')
       .height('100%')
-      .backgroundColor('#F1F3F5')
+      .backgroundColor($r('app.color.transparent'))
     }
     .title(PageHead($r('app.string.list_page_title')))
     .onBackPressed(() => {
       this.pageInfos.pop();
       return true;
     })
-    .backgroundColor($r('app.color.background_secondary'))
+    .backgroundImage($r('app.media.bg_2'))
+    .backgroundImageSize(ImageSize.Cover)
+    .backgroundImagePosition(Alignment.Center)
+    .backgroundEffect({ radius: 2, color: $r('app.color.background_blur') })
+    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
   }
 }
