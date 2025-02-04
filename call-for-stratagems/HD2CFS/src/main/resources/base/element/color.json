@@ -26,19 +26,19 @@
     },
     {
       "name": "background_primary",
-      "value": "#cc080808"
+      "value": "#dd080808"
     },
     {
       "name": "background_secondary",
-      "value": "#cc222222"
+      "value": "#dd222222"
     },
     {
       "name": "background_tertiary",
-      "value": "#cc353535"
+      "value": "#353535"
     },
     {
       "name": "background_blur",
-      "value": "#bb1a1a1a"
+      "value": "#cc101010"
     },
     {
       "name": "border",

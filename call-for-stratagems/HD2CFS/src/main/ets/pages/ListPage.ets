@@ -3,42 +3,9 @@ import DatabaseService from '../database/DatabaseService';
 import DatabaseModel from '../database/model/DatabaseModel';
 import { i18n } from '@kit.LocalizationKit';
 import StratagemModel from '../database/model/StratagemModel';
-import { fileUri } from '@kit.CoreFileKit';
 import { display } from '@kit.ArkUI';
-
-/**
- * 战备项目
- * @param img 图像资源
- * @param name 名称资源
- */
-@Builder
-function StratagemItem(s: StratagemModel) {
-  ListItem() {
-    RelativeContainer() {
-      Image(fileUri.getUriFromPath(getContext().filesDir + `/${s.dbId}/${s.icon}.svg`))
-        .margin(5)
-        .padding(5)
-        .alignRules(AlignCenter)
-        .backgroundColor($r('app.color.background_tertiary'))
-      Text()
-        .borderWidth({ top: 2, left: 2, right: 2 })
-        .width('100%')
-        .height('40%')
-        .borderColor($r('app.color.border'))
-        .alignRules(AlignTop)
-      Text()
-        .borderWidth({ bottom: 2, left: 2, right: 2 })
-        .width('100%')
-        .height('40%')
-        .borderColor($r('app.color.border'))
-        .alignRules(AlignBottom)
-    }
-    .width('100%')
-    .height('100%')
-  }
-  .width('85')
-  .height('85')
-}
+import { StratagemInfoDialog } from '../common/StratagemInfoDialog';
+import { fileUri } from '@kit.CoreFileKit';
 
 @Component
 export struct ListPage {
@@ -50,6 +17,16 @@ export struct ListPage {
   private controller: TabsController = new TabsController()
   @State tabBarWidth: number = 100
   @State Lanes: LengthConstrain = { minLength: 90, maxLength: 90 }
+  @State curStratagem: StratagemModel = new StratagemModel(0, 'null', 'null', 'null', 'null', [])
+
+  infoDialog: CustomDialogController = new CustomDialogController({
+    builder: StratagemInfoDialog({
+      stratagem: this.curStratagem
+    }),
+    alignment: DialogAlignment.Center,
+    customStyle: true,
+    maskColor: $r('app.color.background_blur')
+  })
 
   @Builder
   tabBuilder(index: number, name: string) {
@@ -120,6 +97,45 @@ export struct ListPage {
     this.tabBarWidth = px2vp(this.dbList.length > 1 ? dsp.width * 0.62 : dsp.width);
   }
 
+  /**
+   * 战备项目
+   * @param img 图像资源
+   * @param name 名称资源
+   */
+  @Builder StratagemItem(s: StratagemModel) {
+  ListItem() {
+    RelativeContainer() {
+      Image(fileUri.getUriFromPath(getContext().filesDir + `/${s.dbId}/${s.icon}.svg`))
+        .margin(5)
+        .padding(5)
+        .alignRules(AlignCenter)
+        .backgroundColor($r('app.color.background_tertiary'))
+        .draggable(false)
+      Text()
+        .borderWidth({ top: 2, left: 2, right: 2 })
+        .width('100%')
+        .height('40%')
+        .borderColor($r('app.color.border'))
+        .alignRules(AlignTop)
+      Text()
+        .borderWidth({ bottom: 2, left: 2, right: 2 })
+        .width('100%')
+        .height('40%')
+        .borderColor($r('app.color.border'))
+        .alignRules(AlignBottom)
+    }
+    .width('100%')
+    .height('100%')
+  }
+  .width('85')
+  .height('85')
+  .gesture(LongPressGesture({repeat: false})
+    .onAction((_e: GestureEvent) => {
+      this.curStratagem = s;
+      this.infoDialog.open();
+    }))
+}
+
   build() {
     NavDestination() {
       Tabs({ barPosition: BarPosition.Start, index: this.currentIndex, controller: this.controller }) {
@@ -128,7 +144,7 @@ export struct ListPage {
             List({ space: 5 }) {
               if (this.stratagemList[dbIndex].length != 0) {
                 ForEach(this.stratagemList[dbIndex], (sItem: StratagemModel) => {
-                  StratagemItem(sItem)
+                  this.StratagemItem(sItem)
                 })
               } else { // 无战备，显示空
                 ListItem() {

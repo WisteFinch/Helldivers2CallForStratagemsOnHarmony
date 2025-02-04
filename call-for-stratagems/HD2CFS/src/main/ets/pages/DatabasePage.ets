@@ -21,7 +21,8 @@ export struct DatabasePage {
       }
     }),
     alignment: DialogAlignment.Bottom,
-    customStyle: true
+    customStyle: true,
+    maskColor: $r('app.color.background_blur')
   })
   updateDbDialog: CustomDialogController = new CustomDialogController({
     builder: DatabaseUpdateDialog({
@@ -33,7 +34,8 @@ export struct DatabasePage {
       }
     }),
     alignment: DialogAlignment.Bottom,
-    customStyle: true
+    customStyle: true,
+    maskColor: $r('app.color.background_blur')
   })
   infoDialog: CustomDialogController = new CustomDialogController({
     builder: DatabaseInfoDialog({
@@ -45,7 +47,8 @@ export struct DatabasePage {
       }
     }),
     alignment: DialogAlignment.Bottom,
-    customStyle: true
+    customStyle: true,
+    maskColor: $r('app.color.background_blur')
   })
 
   aboutToAppear() {
