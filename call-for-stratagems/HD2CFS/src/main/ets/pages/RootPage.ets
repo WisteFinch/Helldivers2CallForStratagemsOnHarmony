@@ -1,6 +1,6 @@
-import { DatabaseUpdateDialog } from "../common/DatabaseUpdateDialog";
-import { PageHead, TextInputDialog } from "../common/UiUtils";
+import { AlignBottomRight, AlignTop, AppButton, PageHead } from "../common/UiUtils";
 import { DatabasePage } from "./DatabasePage";
+import { EditPage } from "./EditPage";
 import { ListPage } from "./ListPage";
 import { SettingsPage } from "./SettingsPage";
 
@@ -13,29 +13,79 @@ struct RootPage {
   PageMap(name: string) {
     if (name === "SettingsPage") {
       SettingsPage()
-    }
-    else if (name === "DatabasePage") {
+    } else if (name === "DatabasePage") {
       DatabasePage()
-    }
-    else if (name === "ListPage") {
+    } else if (name === "ListPage") {
       ListPage()
+    } else if (name === "EditPage") {
+      EditPage()
     }
+  }
+
+  /**
+   * 导航菜单
+   */
+  @Builder
+  navMenus() {
+    Row({ space: 5 }) {
+      // 战备列表页面
+      AppButton({
+        click: () => {
+          this.pageInfos.pushPath({ name: "ListPage" });
+        }
+      }) {
+        Image($r('app.media.ic_list'))
+          .width(20)
+          .height(20)
+      }
+
+      // 设置页面
+      AppButton({
+        click: () => {
+          this.pageInfos.pushPath({ name: "SettingsPage" });
+        }
+      }) {
+        Image($r('app.media.ic_settings'))
+          .width(20)
+          .height(20)
+      }
+    }
+    .height('100%')
+    .alignItems(VerticalAlign.Center)
+    .margin({ right: 10 })
   }
 
   build() {
     Navigation(this.pageInfos) {
-      List({ space: 12 }) {
-        ListItem() {
-          Text("Page")
-            .width("100%")
-            .height(72)
-            .backgroundColor($r('app.color.background_secondary'))
-            .borderWidth(2)
-            .borderColor($r('app.color.border'))
-            .fontSize(16)
-            .fontColor($r('app.color.text_primary'))
-            .fontWeight(500)
-            .textAlign(TextAlign.Center)
+      RelativeContainer() {
+        List({ space: 12 }) {
+          ListItem() {
+            Text("Page")
+              .width("100%")
+              .height(72)
+              .backgroundColor($r('app.color.background_secondary'))
+              .borderWidth(2)
+              .borderColor($r('app.color.border'))
+              .fontSize(16)
+              .fontColor($r('app.color.text_primary'))
+              .fontWeight(500)
+              .textAlign(TextAlign.Center)
+          }.onClick(() => {
+            this.pageInfos.pushPath({ name: "EditPage", param: false });
+          })
+        }
+        .alignRules(AlignTop)
+        .width("100%")
+        .height("100%")
+
+        AppButton({
+          rules: AlignBottomRight, marginValue: 10, click: () => {
+            this.pageInfos.pushPath({ name: "EditPage", param: true });
+          }
+        }) {
+          Image($r('app.media.ic_add'))
+            .width(40)
+            .height(40)
         }
       }
       .width("100%")
@@ -44,22 +94,7 @@ struct RootPage {
       .backgroundColor($r('app.color.transparent'))
     }
     .title(PageHead($r('app.string.HD2CFSAbility_label')))
-    .menus([
-      {
-        value: "",
-        icon: "resources/base/media/ic_list.svg",
-        action: ()=> {
-          this.pageInfos.pushPath({ name: "ListPage"});
-        }
-      },
-      {
-        value: "",
-        icon: 'resources/base/media/ic_settings.svg',
-        action: ()=> {
-          this.pageInfos.pushPath({ name: "SettingsPage"});
-        }
-      }
-    ])
+    .menus(this.navMenus)
     .backgroundColor($r('app.color.background_primary'))
     .backgroundImage($r('app.media.bg_1'))
     .backgroundImageSize(ImageSize.Cover)
@@ -68,6 +103,7 @@ struct RootPage {
     .mode(NavigationMode.Stack)
     .navDestination(this.PageMap)
     .titleMode(NavigationTitleMode.Mini)
+    .hideToolBar(true)
     .hideBackButton(true)
     .width('100%')
     .height('100%')

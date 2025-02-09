@@ -8,15 +8,27 @@ import { DatabaseInfoDialog } from '../common/DatabaseInfoDialog';
 @Component
 export struct DatabasePage {
   @Consume('pageInfos') pageInfos: NavPathStack;
+  /**
+   * 数据库渠道数据
+   */
   @State list: DatabaseModel[] = []
-  @State addList: string[] = []
+  /**
+   * 任务列表
+   */
+  @State tasks: string[] = []
+  /**
+   * 当前选定的数据库渠道
+   */
   @State curDb: DatabaseModel = new DatabaseModel('null', 'null', 'null', 'null', 'null')
+  /**
+   * 添加数据库渠道对话框
+   */
   addDbDialog: CustomDialogController = new CustomDialogController({
     builder: TextInputDialog({
       title: $r('app.string.db_add_title'),
       placeholder: $r('app.string.db_add_hint'),
       confirm: (value) => {
-        this.addList = [value];
+        this.tasks = [value];
         this.updateDbDialog.open();
       }
     }),
@@ -24,9 +36,12 @@ export struct DatabasePage {
     customStyle: true,
     maskColor: $r('app.color.background_blur')
   })
+  /**
+   * 升级数据库渠道对话框
+   */
   updateDbDialog: CustomDialogController = new CustomDialogController({
     builder: DatabaseUpdateDialog({
-      tasks: this.addList,
+      tasks: this.tasks,
       confirm: () => {
         DatabaseService.GetDbList().then((value) => {
           this.list = value;
@@ -37,6 +52,9 @@ export struct DatabasePage {
     customStyle: true,
     maskColor: $r('app.color.background_blur')
   })
+  /**
+   * 数据库渠道信息对话框
+   */
   infoDialog: CustomDialogController = new CustomDialogController({
     builder: DatabaseInfoDialog({
       db: this.curDb,
@@ -50,6 +68,60 @@ export struct DatabasePage {
     customStyle: true,
     maskColor: $r('app.color.background_blur')
   })
+
+  /**
+   * 导航菜单
+   */
+  @Builder
+  navMenus() {
+    Row({ space: 5 }) {
+      // 更新数据库渠道
+      if (this.list.length > 0) {
+        AppButton({
+          click: () => {
+            this.tasks = [];
+            for (let i = 0; i < this.list.length; i++) {
+              this.tasks.push(this.list[i].url);
+            }
+            this.updateDbDialog.open();
+          }
+        }) {
+          Image($r('app.media.ic_sync'))
+            .width(20)
+            .height(20)
+        }
+      } else {
+        AppButton({
+          click: () => {
+            this.tasks = [];
+            for (let i = 0; i < this.list.length; i++) {
+              this.tasks.push(this.list[i].url);
+            }
+            this.updateDbDialog.open();
+          },
+          enable: false
+        }) {
+          Image($r('app.media.ic_sync'))
+            .width(20)
+            .height(20)
+        }
+      }
+
+      // 添加数据库渠道
+      AppButton({
+        click: () => {
+          this.addDbDialog.open()
+        }
+      }) {
+        Image($r('app.media.ic_add'))
+          .width(20)
+          .height(20)
+      }
+    }
+    .height('100%')
+    .alignItems(VerticalAlign.Center)
+    .margin({ right: 10 })
+  }
 
   aboutToAppear() {
     DatabaseService.GetDbList().then((value) => {
@@ -104,7 +176,7 @@ export struct DatabasePage {
               // 更新
               AppButton({
                 click: () => {
-                  this.addList = [item.url];
+                  this.tasks = [item.url];
                   this.updateDbDialog.open();
                 }
               }) {
@@ -153,26 +225,6 @@ export struct DatabasePage {
     .backgroundImagePosition(Alignment.Center)
     .backgroundEffect({ radius: 2, color: $r('app.color.background_blur') })
     .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
-    .menus([
-      {
-        value: '',
-        icon: 'resources/base/media/ic_sync.svg',
-        action: () => {
-          this.addList = [];
-          for (let i = 0; i < this.list.length; i++) {
-            this.addList.push(this.list[i].url);
-          }
-          this.updateDbDialog.open();
-        },
-        isEnabled: this.list.length > 0
-      },
-      {
-        value: '',
-        icon: 'resources/base/media/ic_add.svg',
-        action: () => {
-          this.addDbDialog.open();
-        }
-      }
-    ])
+    .menus(this.navMenus())
   }
 }

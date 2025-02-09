@@ -1,8 +1,7 @@
 import StratagemModel from "../database/model/StratagemModel"
 import { fileUri } from "@kit.CoreFileKit"
 import { i18n } from "@kit.LocalizationKit"
-import { Button } from "@ohos.multimodalInput.mouseEvent"
-import { ButtonBorderOptions } from "./UiUtils"
+import { ButtonBorderNormalOptions } from "./UiUtils"
 
 /**
  * 战备信息对话框
@@ -13,7 +12,7 @@ export struct StratagemInfoDialog {
   /**
    * 战备信息
    */
-  @Link stratagem: StratagemModel
+  @Prop stratagem: StratagemModel
 
   build() {
     Row() {
@@ -65,7 +64,7 @@ export struct StratagemInfoDialog {
       .padding(10)
       .backgroundColor($r('app.color.background_primary'))
     }
-    .borderImage(ButtonBorderOptions)
+    .borderImage(ButtonBorderNormalOptions)
     .backgroundColor($r('app.color.transparent'))
   }
 }

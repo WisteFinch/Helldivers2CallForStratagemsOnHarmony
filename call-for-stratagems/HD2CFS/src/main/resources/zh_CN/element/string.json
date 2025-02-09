@@ -33,10 +33,6 @@
       "value": "播放"
     },
     {
-      "name": "root_new_group_fab",
-      "value": "新战备组合"
-    },
-    {
       "name": "view_play_fab",
       "value": "播放"
     },
@@ -295,6 +291,10 @@
     {
       "name": "stratagem_empty",
       "value": "空"
+    },
+    {
+      "name": "edit_page_title_add",
+      "value": "新增战备组合"
     }
   ]
 }

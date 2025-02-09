@@ -42,7 +42,7 @@ export struct DatabaseUpdateDialog {
   controller: CustomDialogController
   confirm: () => void = () => {
   }
-  @Link tasks: string[]
+  @Prop tasks: string[]
   @State _tasks: TaskItem[] = []
   @State taskIndex: number = 0
   @State finished: boolean = false

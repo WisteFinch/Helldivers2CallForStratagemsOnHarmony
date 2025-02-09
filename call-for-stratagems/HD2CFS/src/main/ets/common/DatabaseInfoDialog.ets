@@ -18,7 +18,7 @@ export struct DatabaseInfoDialog {
   /**
    * 数据库信息
    */
-  @Link db: DatabaseModel
+  @Prop db: DatabaseModel
   /**
    * 分割线
    */

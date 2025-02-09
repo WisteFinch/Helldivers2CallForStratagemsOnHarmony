@@ -33,10 +33,6 @@
       "value": "Play"
     },
     {
-      "name": "root_new_group_fab",
-      "value": "New Stratagems Group"
-    },
-    {
       "name": "root_no_group",
       "value": "The Galactic War Awaits"
     },
@@ -295,6 +291,10 @@
     {
       "name": "stratagem_empty",
       "value": "Empty"
+    },
+    {
+      "name": "edit_page_title_add",
+      "value": "Add Group"
     }
   ]
 }
