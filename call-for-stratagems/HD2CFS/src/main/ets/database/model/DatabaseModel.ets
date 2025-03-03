@@ -28,11 +28,17 @@ export default class DatabaseModel {
    */
   ver: string
 
-  constructor(id: string, name: string, nameZh: string, url: string, ver: string) {
+  /**
+   * 顺序
+   */
+  idx: number
+
+  constructor(id: string, name: string, nameZh: string, url: string, ver: string, idx: number) {
     this.id = id
     this.name = name
     this.nameZh = nameZh
     this.url = url
     this.ver = ver
+    this.idx = idx
   }
 }

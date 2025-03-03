@@ -17,7 +17,8 @@ export class DatabaseDao {
                   name TEXT,
                   nameZh TEXT,
                   url TEXT,
-                  ver TEXT)`;
+                  ver TEXT,
+                  idx INTEGER)`;
     // 创建表
     relationalStore.getRdbStore(context, {
       name: DATABASE_NAME,
@@ -38,16 +39,18 @@ export class DatabaseDao {
       return [];
     }
     let predicates = new relationalStore.RdbPredicates(this.tableName);
-    let res = await this.rdbStore?.query(predicates, ['id', 'name', 'nameZh', 'url', 'ver']);
+    predicates.orderByAsc('idx');
+    let res = await this.rdbStore?.query(predicates, ['id', 'name', 'nameZh', 'url', 'ver', 'idx']);
     let dbs: DatabaseModel[] = [];
-    while(!res.isAtLastRow){
+    while (!res.isAtLastRow) {
       res.goToNextRow();
       let id = res.getString(res.getColumnIndex('id'));
       let name = res.getString(res.getColumnIndex('name'));
       let nameZh = res.getString(res.getColumnIndex('nameZh'));
       let url = res.getString(res.getColumnIndex('url'));
       let ver = res.getString(res.getColumnIndex('ver'));
-      dbs.push(new DatabaseModel(id, name, nameZh, url, ver));
+      let idx = res.getLong(res.getColumnIndex('idx'));
+      dbs.push(new DatabaseModel(id, name, nameZh, url, ver, idx));
     }
     return dbs;
   }
@@ -57,22 +60,23 @@ export class DatabaseDao {
    * @param id 数据库渠道id
    * @returns 数据库渠道
    */
-  async getDB(id: string): Promise<DatabaseModel>{
+  async getDB(id: string): Promise<DatabaseModel> {
     if (this.rdbStore == null) {
-      return new DatabaseModel('null', 'null', 'null', 'null', 'null');
+      return new DatabaseModel('null', 'null', 'null', 'null', 'null', 0);
     }
     let predicates = new relationalStore.RdbPredicates(this.tableName);
     predicates.equalTo('id', id);
-    let res = await this.rdbStore?.query(predicates, ['name', 'nameZh', 'url', 'ver']);
+    let res = await this.rdbStore?.query(predicates, ['name', 'nameZh', 'url', 'ver', 'idx']);
     if (res.isAtLastRow) {
-      return new DatabaseModel('null', 'null', 'null', 'null', 'null');
+      return new DatabaseModel('null', 'null', 'null', 'null', 'null', 0);
     } else {
       res.goToNextRow();
       let name = res.getString(res.getColumnIndex('name'));
       let nameZh = res.getString(res.getColumnIndex('nameZh'));
       let url = res.getString(res.getColumnIndex('url'));
       let ver = res.getString(res.getColumnIndex('ver'));
-      return new DatabaseModel(id, name, nameZh, url, ver);
+      let idx = res.getLong(res.getColumnIndex('idx'));
+      return new DatabaseModel(id, name, nameZh, url, ver, idx);
     }
   }
 
@@ -86,7 +90,15 @@ export class DatabaseDao {
     let nameZh = db.nameZh;
     let url = db.url;
     let ver = db.ver
-    this.rdbStore?.insert(this.tableName, {'id': id, 'name': name, 'nameZh': nameZh, 'url': url, 'ver': ver});
+    let idx = db.idx
+    this.rdbStore?.insert(this.tableName, {
+      'id': id,
+      'name': name,
+      'nameZh': nameZh,
+      'url': url,
+      'ver': ver,
+      'idx': idx
+    });
   }
 
   /**
@@ -98,9 +110,16 @@ export class DatabaseDao {
     let nameZh = db.nameZh;
     let url = db.url;
     let ver = db.ver
+    let idx = db.idx
     let predicates = new relationalStore.RdbPredicates(this.tableName);
     predicates.equalTo('id', db.id);
-    this.rdbStore?.update({'name': name, 'nameZh': nameZh, 'url': url, 'ver': ver}, predicates);
+    this.rdbStore?.update({
+      'name': name,
+      'nameZh': nameZh,
+      'url': url,
+      'ver': ver,
+      'idx': idx
+    }, predicates);
   }
 
   /**
@@ -124,9 +143,21 @@ export class DatabaseDao {
     let res = await this.rdbStore?.query(predicates);
     if (res == undefined) {
       return false;
-    }
-    else {
+    } else {
       return res.rowCount > 0;
     }
+  }
+
+  /**
+   * 获取数据库渠道数量
+   * @returns 数据库渠道数量
+   */
+  async getCount(): Promise<number> {
+    if (this.rdbStore == null) {
+      return 0;
+    }
+    let predicates = new relationalStore.RdbPredicates(this.tableName);
+    let res = await this.rdbStore?.query(predicates, ['id', 'name', 'nameZh', 'url', 'ver', 'idx']);
+    return res.columnCount;
   }
 }

@@ -295,6 +295,30 @@
     {
       "name": "edit_page_title_add",
       "value": "Add Group"
+    },
+    {
+      "name": "set_ctrl_fastboot_mode",
+      "value": "Enable Fastboot Mode"
+    },
+    {
+      "name": "set_ctrl_fastboot_mode_desc",
+      "value": "Click the group to start directly, long press the group to view details"
+    },
+    {
+      "name": "set_ctrl_sfx",
+      "value": "Enable Sound Effects"
+    },
+    {
+      "name": "set_ctrl_sfx_desc",
+      "value": "Enable sound effects for step input and stratagem activation"
+    },
+    {
+      "name": "set_ctrl_vibrator",
+      "value": "Enable Vibrator"
+    },
+    {
+      "name": "set_ctrl_vibrator_desc",
+      "value": "Enable vibrator for step input and stratagem activation"
     }
   ]
 }

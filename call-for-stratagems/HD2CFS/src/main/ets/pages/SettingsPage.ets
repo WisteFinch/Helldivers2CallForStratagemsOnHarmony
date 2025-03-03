@@ -3,6 +3,7 @@ import {
   INPUT_TYPE_OPTIONS,
   LANGUAGE_OPTIONS,
   PREFERENCES_DELAY,
+  PREFERENCES_FASTBOOT_MODE,
   PREFERENCES_INPUT_DOWN,
   PREFERENCES_INPUT_DOWN_DSP,
   PREFERENCES_INPUT_LEFT,
@@ -18,13 +19,14 @@ import {
   PREFERENCES_RETRY,
   PREFERENCES_SERVER_ADDR,
   PREFERENCES_SERVER_PORT,
+  PREFERENCES_SFX,
   PREFERENCES_SIMPLIFIED_MODE,
   PREFERENCES_SYNC_PORT,
   PREFERENCES_TYPE_OPEN,
   PREFERENCES_TYPE_OPEN_DSP
 } from '../common/Constants';
 import PreferencesUtil from '../common/PreferencesUtil';
-import { AlignCenter, AppButton, ListItemGroupHead, PageHead } from '../common/UiUtils';
+import { AppButton, ListItemGroupHead, PageHead } from '../common/UiUtils';
 
 /**
  * 下拉菜单
@@ -364,6 +366,99 @@ export struct SettingsPage {
                     .selectedColor($r('app.color.stress'))
                     .onChange((isOn: boolean) => {
                       PreferencesUtil.putVal(PREFERENCES_SIMPLIFIED_MODE, isOn);
+                    })
+                }
+                .width('100%')
+                .alignItems(VerticalAlign.Center)
+              }
+              .padding(5)
+              .backgroundColor($r('app.color.background_primary'))
+
+              // 快速启动模式
+              ListItem() {
+                Row() {
+                  Column() {
+                    Text($r('app.string.set_ctrl_fastboot_mode'))
+                      .fontColor($r('app.color.text_primary'))
+                      .fontWeight(FontWeight.Medium)
+                      .fontFamily('Sinclair')
+                    Text($r('app.string.set_ctrl_fastboot_mode_desc'))
+                      .fontColor($r('app.color.text_secondary'))
+                      .fontFamily('Sinclair')
+                  }
+                  .alignItems(HorizontalAlign.Start)
+                  .width('80%')
+
+                  Blank()
+                  Toggle({
+                    type: ToggleType.Switch,
+                    isOn: Boolean(PreferencesUtil.getVal(PREFERENCES_FASTBOOT_MODE, false))
+                  })
+                    .selectedColor($r('app.color.stress'))
+                    .onChange((isOn: boolean) => {
+                      PreferencesUtil.putVal(PREFERENCES_FASTBOOT_MODE, isOn);
+                    })
+                }
+                .width('100%')
+                .alignItems(VerticalAlign.Center)
+              }
+              .padding(5)
+              .backgroundColor($r('app.color.background_primary'))
+
+              // 音效
+              ListItem() {
+                Row() {
+                  Column() {
+                    Text($r('app.string.set_ctrl_sfx'))
+                      .fontColor($r('app.color.text_primary'))
+                      .fontWeight(FontWeight.Medium)
+                      .fontFamily('Sinclair')
+                    Text($r('app.string.set_ctrl_sfx_desc'))
+                      .fontColor($r('app.color.text_secondary'))
+                      .fontFamily('Sinclair')
+                  }
+                  .alignItems(HorizontalAlign.Start)
+                  .width('80%')
+
+                  Blank()
+                  Toggle({
+                    type: ToggleType.Switch,
+                    isOn: Boolean(PreferencesUtil.getVal(PREFERENCES_SFX, false))
+                  })
+                    .selectedColor($r('app.color.stress'))
+                    .onChange((isOn: boolean) => {
+                      PreferencesUtil.putVal(PREFERENCES_SFX, isOn);
+                    })
+                }
+                .width('100%')
+                .alignItems(VerticalAlign.Center)
+              }
+              .padding(5)
+              .backgroundColor($r('app.color.background_primary'))
+
+              // 震动
+              ListItem() {
+                Row() {
+                  Column() {
+                    Text($r('app.string.set_ctrl_vibrator'))
+                      .fontColor($r('app.color.text_primary'))
+                      .fontWeight(FontWeight.Medium)
+                      .fontFamily('Sinclair')
+                    Text($r('app.string.set_ctrl_vibrator_desc'))
+                      .fontColor($r('app.color.text_secondary'))
+                      .fontFamily('Sinclair')
+                  }
+                  .alignItems(HorizontalAlign.Start)
+                  .width('80%')
+
+                  Blank()
+                  Toggle({
+                    type: ToggleType.Switch,
+                    isOn: Boolean(PreferencesUtil.getVal(PREFERENCES_FASTBOOT_MODE, false))
+                  })
+                    .selectedColor($r('app.color.stress'))
+                    .onChange((isOn: boolean) => {
+                      PreferencesUtil.putVal(PREFERENCES_FASTBOOT_MODE, isOn);
                     })
                 }
                 .width('100%')

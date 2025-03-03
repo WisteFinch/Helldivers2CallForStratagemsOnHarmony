@@ -3,6 +3,11 @@ import { rcp } from "@kit.RemoteCommunicationKit"
 import { request } from "@kit.BasicServicesKit"
 import fs from "@ohos.file.fs"
 
+/**
+ * 获取数据
+ * @param url 地址
+ * @returns 字符串数据
+ */
 export async function fetchData(url: string): Promise<string> {
   const request = new rcp.Request(url, 'GET');
   const session = rcp.createSession();
@@ -14,6 +19,13 @@ export async function fetchData(url: string): Promise<string> {
   return decoder.decodeToString(new Uint8Array(res.body));
 }
 
+/**
+ * 下载文件
+ * @param url 地址
+ * @param dir 文件夹
+ * @param path 文件路径
+ * @returns
+ */
 export async function downloadToFileDir(url: string, dir: string, path: string): Promise<boolean> {
   try {
     if (!await fs.access(getContext().filesDir + dir)) {

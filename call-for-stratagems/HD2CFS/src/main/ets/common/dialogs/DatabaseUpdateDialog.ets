@@ -1,8 +1,8 @@
-import DatabaseService from '../database/DatabaseService'
-import DatabaseModel from '../database/model/DatabaseModel'
-import StratagemModel from '../database/model/StratagemModel'
-import { downloadToFileDir, fetchData } from './HttpUtils'
-import { AppButton } from './UiUtils'
+import DatabaseService from '../../database/DatabaseService'
+import DatabaseModel from '../../database/model/DatabaseModel'
+import StratagemModel from '../../database/model/StratagemModel'
+import { downloadToFileDir, fetchData } from '../HttpUtils'
+import { AppButton } from '../UiUtils'
 
 enum UpdateStage {
   Idle,
@@ -68,7 +68,7 @@ export struct DatabaseUpdateDialog {
         this._tasks = [...this._tasks];
         let indexRes: string;
         try {
-          indexRes = await fetchData(this.tasks[this.taskIndex]);
+          indexRes = await fetchData(baseUrl + 'index.json');
         } catch (_err) {
           throw new Error(UpdateErr.DownloadIndexErr.toString());
         }
@@ -99,8 +99,9 @@ export struct DatabaseUpdateDialog {
           this._tasks = [...this._tasks];
           continue;
         }
+        let count = await DatabaseService.getDbCount();
         DatabaseService.deleteStratagems(dbId);
-        await DatabaseService.addDb(new DatabaseModel(dbId, dbName, dbNameZh, baseUrl, 'null'));
+        await DatabaseService.addDb(new DatabaseModel(dbId, dbName, dbNameZh, baseUrl, 'null', count));
 
         // 获取数据库信息
         if (this.cancel) {
@@ -165,7 +166,7 @@ export struct DatabaseUpdateDialog {
         if (this.cancel) {
           return;
         }
-        await DatabaseService.addDb(new DatabaseModel(dbId, dbName, dbNameZh, baseUrl, date));
+        await DatabaseService.addDb(new DatabaseModel(dbId, dbName, dbNameZh, baseUrl, date, count));
         this._tasks[this.taskIndex].stage = UpdateStage.Done;
         this._tasks[this.taskIndex].index = this._tasks[this.taskIndex].count = 1;
         this._tasks[this.taskIndex].txt = dbId;
@@ -196,90 +197,110 @@ export struct DatabaseUpdateDialog {
   }
 
   build() {
-    Column({ space: 20 }) {
-      Text($r('app.string.db_updt_title'))
-        .fontSize(20)
-        .fontWeight(FontWeight.Medium)
-        .fontColor($r('app.color.text_stress'))
-        .fontFamily('Sinclair')
+    Column() {
+      Column() {
+        // 标题
+        Text($r('app.string.db_updt_title'))
+          .margin(10)
+          .fontSize(20)
+          .fontWeight(FontWeight.Medium)
+          .fontColor($r('app.color.text_stress'))
+          .fontFamily('Sinclair')
 
-      Column({ space: 10 }) {
-        Column() {
-          Text($r('app.string.db_updt_task', this.taskIndex.toString(), this._tasks.length.toString()))
-            .fontColor($r('app.color.text_primary'))
-        .fontFamily('Sinclair')
-          Progress({ value: this.taskIndex, total: this._tasks.length })
-            .color($r('app.color.highlight'))
-            .borderRadius(0)
-            .style({strokeRadius: 0, strokeWidth: 5})
-        }
-        .alignItems(HorizontalAlign.Start)
+        Text()
+          .width('100%')
+          .height(10)
+          .backgroundColor($r('app.color.transparent'))
+          .backgroundImage($r('app.media.stripes'))
+          .backgroundImageSize(ImageSize.Cover)
 
-        ForEach(this.tasks, (_i: string, index: number) => {
+        // 进度
+        Column({ space: 10 }) {
+          // 总进度
           Column() {
-            if (this._tasks[index].stage == UpdateStage.Idle) {
-              Text($r('app.string.db_updt_idle', this._tasks[index].url))
-                .fontColor($r('app.color.text_primary'))
-                .fontFamily('Sinclair')
-            } else if (this._tasks[index].stage == UpdateStage.DownloadingIndex) {
-              Text($r('app.string.db_updt_dl_idx', this._tasks[index].txt))
-                .fontColor($r('app.color.text_primary'))
-                .fontFamily('Sinclair')
-            } else if (this._tasks[index].stage == UpdateStage.Latest) {
-              Text($r('app.string.db_updt_latest', this._tasks[index].txt))
-                .fontColor($r('app.color.text_primary'))
-                .fontFamily('Sinclair')
-            } else if (this._tasks[index].stage == UpdateStage.DownloadingDb) {
-              Text($r('app.string.db_updt_dl_db', this._tasks[index].txt))
-                .fontColor($r('app.color.text_primary'))
-                .fontFamily('Sinclair')
-            } else if (this._tasks[index].stage == UpdateStage.DownloadingImg) {
-              Text($r('app.string.db_updt_dl_img', this._tasks[index].index.toString(),
-                this._tasks[index].count.toString(), this._tasks[index].txt))
-                .fontColor($r('app.color.text_primary'))
-                .fontFamily('Sinclair')
-            } else if (this._tasks[index].stage == UpdateStage.Done) {
-              Text($r('app.string.db_updt_done', this._tasks[index].txt))
-                .fontColor($r('app.color.text_primary'))
-                .fontFamily('Sinclair')
-            } else if (this._tasks[index].stage == UpdateStage.Err) {
-              if (this._tasks[index].err == UpdateErr.DownloadIndexErr.toString()) {
-                Text($r('app.string.db_updt_err_dl_idx', this._tasks[index].txt))
-                  .fontColor($r('app.color.text_primary'))
-                  .fontFamily('Sinclair')
-              } else if (this._tasks[index].err == UpdateErr.ParseIndexErr.toString()) {
-                Text($r('app.string.db_updt_err_parse_idx', this._tasks[index].txt))
-                  .fontColor($r('app.color.text_primary'))
-                  .fontFamily('Sinclair')
-              } else if (this._tasks[index].err == UpdateErr.DownloadDbErr.toString()) {
-                Text($r('app.string.db_updt_err_dl_db', this._tasks[index].txt))
-                  .fontColor($r('app.color.text_primary'))
-                  .fontFamily('Sinclair')
-              } else if (this._tasks[index].err == UpdateErr.ParseDbErr.toString()) {
-                Text($r('app.string.db_updt_err_parse_db', this._tasks[index].txt))
-                  .fontColor($r('app.color.text_primary'))
-                  .fontFamily('Sinclair')
-              } else if (this._tasks[index].err == UpdateErr.DownloadImgErr.toString()) {
-                Text($r('app.string.db_updt_err_dl_img', this._tasks[index].txt))
-                  .fontColor($r('app.color.text_primary'))
-                  .fontFamily('Sinclair')
-              } else if (this._tasks[index].err == UpdateErr.ParseStratagemErr.toString()) {
-                Text($r('app.string.db_updt_err_parse_stratagem', this._tasks[index].txt))
-                  .fontColor($r('app.color.text_primary'))
-                  .fontFamily('Sinclair')
-              } else {
-                Text($r('app.string.db_updt_err', this._tasks[index].url))
-                  .fontColor($r('app.color.text_primary'))
-                  .fontFamily('Sinclair')
-              }
-            }
-            Progress({ value: this._tasks[index].index, total: this._tasks[index].count })
+            Text($r('app.string.db_updt_task', this.taskIndex.toString(), this._tasks.length.toString()))
+              .fontColor($r('app.color.text_primary'))
+              .fontFamily('Sinclair')
+            Progress({ value: this.taskIndex, total: this._tasks.length })
               .color($r('app.color.highlight'))
               .borderRadius(0)
               .style({strokeRadius: 0, strokeWidth: 5})
           }
           .alignItems(HorizontalAlign.Start)
+
+          // 子条目
+          ForEach(this.tasks, (_i: string, index: number) => {
+            Column() {
+              if (this._tasks[index].stage == UpdateStage.Idle) {
+                Text($r('app.string.db_updt_idle', this._tasks[index].url))
+                  .fontColor($r('app.color.text_primary'))
+                  .fontFamily('Sinclair')
+              } else if (this._tasks[index].stage == UpdateStage.DownloadingIndex) {
+                Text($r('app.string.db_updt_dl_idx', this._tasks[index].txt))
+                  .fontColor($r('app.color.text_primary'))
+                  .fontFamily('Sinclair')
+              } else if (this._tasks[index].stage == UpdateStage.Latest) {
+                Text($r('app.string.db_updt_latest', this._tasks[index].txt))
+                  .fontColor($r('app.color.text_primary'))
+                  .fontFamily('Sinclair')
+              } else if (this._tasks[index].stage == UpdateStage.DownloadingDb) {
+                Text($r('app.string.db_updt_dl_db', this._tasks[index].txt))
+                  .fontColor($r('app.color.text_primary'))
+                  .fontFamily('Sinclair')
+              } else if (this._tasks[index].stage == UpdateStage.DownloadingImg) {
+                Text($r('app.string.db_updt_dl_img', this._tasks[index].index.toString(),
+                  this._tasks[index].count.toString(), this._tasks[index].txt))
+                  .fontColor($r('app.color.text_primary'))
+                  .fontFamily('Sinclair')
+              } else if (this._tasks[index].stage == UpdateStage.Done) {
+                Text($r('app.string.db_updt_done', this._tasks[index].txt))
+                  .fontColor($r('app.color.text_primary'))
+                  .fontFamily('Sinclair')
+              } else if (this._tasks[index].stage == UpdateStage.Err) {
+                if (this._tasks[index].err == UpdateErr.DownloadIndexErr.toString()) {
+                  Text($r('app.string.db_updt_err_dl_idx', this._tasks[index].txt))
+                    .fontColor($r('app.color.text_primary'))
+                    .fontFamily('Sinclair')
+                } else if (this._tasks[index].err == UpdateErr.ParseIndexErr.toString()) {
+                  Text($r('app.string.db_updt_err_parse_idx', this._tasks[index].txt))
+                    .fontColor($r('app.color.text_primary'))
+                    .fontFamily('Sinclair')
+                } else if (this._tasks[index].err == UpdateErr.DownloadDbErr.toString()) {
+                  Text($r('app.string.db_updt_err_dl_db', this._tasks[index].txt))
+                    .fontColor($r('app.color.text_primary'))
+                    .fontFamily('Sinclair')
+                } else if (this._tasks[index].err == UpdateErr.ParseDbErr.toString()) {
+                  Text($r('app.string.db_updt_err_parse_db', this._tasks[index].txt))
+                    .fontColor($r('app.color.text_primary'))
+                    .fontFamily('Sinclair')
+                } else if (this._tasks[index].err == UpdateErr.DownloadImgErr.toString()) {
+                  Text($r('app.string.db_updt_err_dl_img', this._tasks[index].txt))
+                    .fontColor($r('app.color.text_primary'))
+                    .fontFamily('Sinclair')
+                } else if (this._tasks[index].err == UpdateErr.ParseStratagemErr.toString()) {
+                  Text($r('app.string.db_updt_err_parse_stratagem', this._tasks[index].txt))
+                    .fontColor($r('app.color.text_primary'))
+                    .fontFamily('Sinclair')
+                } else {
+                  Text($r('app.string.db_updt_err', this._tasks[index].url))
+                    .fontColor($r('app.color.text_primary'))
+                    .fontFamily('Sinclair')
+                }
+              }
+              Progress({ value: this._tasks[index].index, total: this._tasks[index].count })
+                .color($r('app.color.highlight'))
+                .borderRadius(0)
+                .style({strokeRadius: 0, strokeWidth: 5})
+            }
+            .alignItems(HorizontalAlign.Start)
+          })
+        }
+        .width('100%')
+        .margin({
+          top: 20,
+          bottom: 10
         })
+        .padding({left:10, right: 10})
 
         // 按钮
         Row({ space: 20 }) {
@@ -307,11 +328,15 @@ export struct DatabaseUpdateDialog {
             }
           }
         }
+        .margin(10)
         .height(40)
       }
+      .margin(5)
+      .backgroundColor($r('app.color.background_primary'))
     }
-    .margin(20)
-    .padding(20)
-    .backgroundColor($r('app.color.background_tertiary'))
+    .margin({ left: 10, right: 10, bottom: 20 })
+    .borderColor($r('app.color.border_highlight'))
+    .borderWidth(2)
+    .backgroundColor($r('app.color.transparent'))
   }
 }

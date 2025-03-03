@@ -1,7 +1,6 @@
-import StratagemModel from "../database/model/StratagemModel"
+import StratagemModel from "../../database/model/StratagemModel"
 import { fileUri } from "@kit.CoreFileKit"
 import { i18n } from "@kit.LocalizationKit"
-import { ButtonBorderNormalOptions } from "./UiUtils"
 
 /**
  * 战备信息对话框
@@ -64,7 +63,8 @@ export struct StratagemInfoDialog {
       .padding(10)
       .backgroundColor($r('app.color.background_primary'))
     }
-    .borderImage(ButtonBorderNormalOptions)
+    .borderColor($r('app.color.border_highlight'))
+    .borderWidth(2)
     .backgroundColor($r('app.color.transparent'))
   }
 }

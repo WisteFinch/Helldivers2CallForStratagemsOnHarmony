@@ -66,6 +66,14 @@ class DatabaseService {
     await this.databaseDao.deleteDb(dbId);
   }
 
+  /**
+   * 获取数据库渠道数量
+   * @returns 数据库渠道数量
+   */
+  async getDbCount(): Promise<number> {
+    return await this.databaseDao.getCount();
+  }
+
   async getStratagemList(dbId: string): Promise<StratagemModel[]> {
     return await this.stratagemDao.getStratagemListByDBId(dbId);
   }

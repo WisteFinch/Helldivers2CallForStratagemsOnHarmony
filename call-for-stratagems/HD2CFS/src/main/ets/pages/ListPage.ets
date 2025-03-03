@@ -4,7 +4,7 @@ import DatabaseModel from '../database/model/DatabaseModel';
 import { i18n } from '@kit.LocalizationKit';
 import StratagemModel from '../database/model/StratagemModel';
 import { display } from '@kit.ArkUI';
-import { StratagemInfoDialog } from '../common/StratagemInfoDialog';
+import { StratagemInfoDialog } from '../common/dialogs/StratagemInfoDialog';
 import { StratagemItem } from '../common/StratagemItem';
 
 @Component
@@ -55,7 +55,7 @@ export struct ListPage {
       Tabs({ barPosition: BarPosition.Start, index: this.currentIndex, controller: this.controller }) {
         ForEach(this.dbList, (dbItem: DatabaseModel, dbIndex: number) => {
           TabContent() {
-            List({ space: 5 }) {
+            List({ space: 10 }) {
               if (this.stratagemList.length > dbIndex && this.stratagemList[dbIndex].length != 0) {
                 ForEach(this.stratagemList[dbIndex], (sItem: StratagemModel) => {
                   StratagemItem({
@@ -115,7 +115,7 @@ export struct ListPage {
       this.pageInfos.pop();
       return true;
     })
-    .backgroundImage($r('app.media.bg_2'))
+    .backgroundImage($r('app.media.bg_3'))
     .backgroundImageSize(ImageSize.Cover)
     .backgroundImagePosition(Alignment.Center)
     .backgroundEffect({ radius: 2, color: $r('app.color.background_blur') })

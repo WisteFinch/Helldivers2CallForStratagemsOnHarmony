@@ -54,87 +54,6 @@ export function PageHead(str: Resource) {
 }
 
 /**
- * 文本输入对话框
- */
-@CustomDialog
-export struct TextInputDialog {
-  controller: CustomDialogController = new CustomDialogController({ builder: TextInputDialog() })
-  /**
-   * 确认回调
-   */
-  confirm: (value: string) => void = () => {
-  }
-  /**
-   * 标题
-   */
-  title: ResourceStr = ''
-  /**
-   * 输入框提示
-   */
-  placeholder: ResourceStr = ''
-  /**
-   * 输入值
-   */
-  value: string = ''
-
-  build() {
-    Column({ space: 20 }) {
-      // 标题
-      Text(this.title)
-        .fontSize(20)
-        .fontWeight(FontWeight.Medium)
-        .fontColor($r('app.color.text_stress'))
-        .fontFamily('Sinclair')
-
-      // 输入框
-      TextInput({ placeholder: this.placeholder })
-        .onChange((value) => {
-          this.value = value;
-        })
-        .caretColor($r('app.color.caret'))
-        .backgroundColor($r('app.color.background_secondary'))
-        .borderRadius(0)
-        .placeholderFont({ family: 'Sinclair' })
-        .fontFamily('Sinclair')
-
-      //按钮
-      Row({ space: 20 }) {
-        // 取消
-        AppButton({
-          weight: 1, click: () => {
-            this.controller.close();
-          }
-        }) {
-          Text($r('app.string.dialog_cancel'))
-            .width('100%')
-            .fontColor($r('app.color.button_text'))
-            .fontFamily('Sinclair')
-            .textAlign(TextAlign.Center)
-        }
-
-        //确认
-        AppButton({
-          weight: 1, click: () => {
-            this.confirm(this.value);
-            this.controller.close();
-          }
-        }) {
-          Text($r('app.string.dialog_accept'))
-            .width('100%')
-            .fontColor($r('app.color.button_text'))
-            .fontFamily('Sinclair')
-            .textAlign(TextAlign.Center)
-        }
-      }
-      .height(40)
-    }
-    .margin(20)
-    .padding(20)
-    .backgroundColor($r('app.color.background_tertiary'))
-  }
-}
-
-/**
  * 按钮边框默认样式
  */
 export const ButtonBorderNormalOptions: BorderImageOption = {
@@ -252,7 +171,7 @@ export struct AppButton {
         this._bgColor = $r('app.color.stress')
         this._borderColor = ButtonBorderPressOptions
       }
-      else if (e.type == TouchType.Up){
+      else if (e.type == TouchType.Up || e.type == TouchType.Cancel) {
         this._bgColor = $r('app.color.background_primary')
         this._borderColor = ButtonBorderNormalOptions
       }

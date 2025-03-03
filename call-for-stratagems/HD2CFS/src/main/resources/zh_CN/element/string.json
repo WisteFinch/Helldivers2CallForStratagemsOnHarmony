@@ -295,6 +295,30 @@
     {
       "name": "edit_page_title_add",
       "value": "新增战备组合"
+    },
+    {
+      "name": "set_ctrl_fastboot_mode",
+      "value": "启用快速启动"
+    },
+    {
+      "name": "set_ctrl_fastboot_mode_desc",
+      "value": "点击组合直接启动，长按组合进入浏览"
+    },
+    {
+      "name": "set_ctrl_sfx",
+      "value": "启用音效"
+    },
+    {
+      "name": "set_ctrl_sfx_desc",
+      "value": "启用按键输入和战备激活的音效"
+    },
+    {
+      "name": "set_ctrl_vibrator",
+      "value": "启用震动"
+    },
+    {
+      "name": "set_ctrl_vibrator_desc",
+      "value": "启用按键输入和战备激活的震动"
     }
   ]
 }
